@@ -1,0 +1,398 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>FAQ — V Pet</title>
+  <link rel="stylesheet" href="style.css" />
+  <style>
+    .faq-section { padding: 96px 40px; background: var(--white); }
+    .faq-category { max-width: 800px; margin: 0 auto 64px; }
+    .faq-category-title {
+      font-size: 12px; font-weight: 600; letter-spacing: 0.15em;
+      text-transform: uppercase; color: var(--blue);
+      margin-bottom: 24px; padding-bottom: 12px;
+      border-bottom: 1px solid var(--border);
+    }
+    .faq-item {
+      border-bottom: 1px solid var(--border);
+      overflow: hidden;
+    }
+    .faq-question {
+      width: 100%; background: none; border: none; cursor: pointer;
+      display: flex; justify-content: space-between; align-items: center;
+      padding: 24px 0; text-align: left; gap: 24px;
+    }
+    .faq-question h3 {
+      font-size: 17px; font-weight: 500; color: var(--black);
+      letter-spacing: -0.2px; line-height: 1.4;
+    }
+    .faq-icon {
+      width: 28px; height: 28px; border-radius: 50%;
+      background: var(--light); flex-shrink: 0;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 18px; color: var(--blue); font-weight: 300;
+      transition: background 0.2s, transform 0.3s;
+    }
+    .faq-item.open .faq-icon {
+      background: var(--blue); color: white; transform: rotate(45deg);
+    }
+    .faq-answer {
+      max-height: 0; overflow: hidden;
+      transition: max-height 0.4s ease, padding 0.3s ease;
+    }
+    .faq-answer p {
+      font-size: 15px; color: var(--grey); line-height: 1.75;
+      padding-bottom: 24px; font-weight: 300;
+    }
+    .faq-answer ul {
+      margin: -8px 0 20px 0; padding-left: 20px;
+    }
+    .faq-answer ul li {
+      font-size: 15px; color: var(--grey); line-height: 1.75;
+      margin-bottom: 4px; font-weight: 300;
+    }
+    .faq-item.open .faq-answer { max-height: 500px; }
+    .faq-cta {
+      background: var(--light); border-radius: 18px;
+      padding: 48px 40px; text-align: center;
+      max-width: 800px; margin: 0 auto;
+    }
+    .faq-cta h3 {
+      font-size: 24px; font-weight: 700; letter-spacing: -0.5px;
+      margin-bottom: 10px;
+    }
+    .faq-cta p { font-size: 16px; color: var(--grey); margin-bottom: 24px; }
+
+    @media (max-width: 600px) {
+      .faq-section { padding: 64px 20px; }
+      .faq-question h3 { font-size: 15px; }
+      .faq-cta { padding: 36px 24px; }
+    }
+  </style>
+</head>
+<body>
+
+  <nav class="nav">
+    <a href="index.html" class="nav-logo">🐾 V Pet <sup>Skudai</sup></a>
+    <ul class="nav-links">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="grooming.html">Grooming</a></li>
+      <li><a href="hotel.html">Pet Hotel</a></li>
+      <li><a href="products.html">Products</a></li>
+      <li><a href="adoption.html">Adoption</a></li>
+      <li><a href="about.html">About</a></li>
+      <li><a href="faq.html" class="active">FAQ</a></li>
+    </ul>
+    <a href="https://wa.me/601136020431" target="_blank" class="nav-cta">Book Now</a>
+    <button class="hamburger" id="hamburger" aria-label="Toggle menu" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
+  </nav>
+
+  <section class="hero" style="min-height: 420px; justify-content: center;">
+    <div class="hero-bg" style="background-image: url('https://images.unsplash.com/photo-1450778869180-41d0601e046e?w=1800&auto=format&fit=crop');"></div>
+    <div class="hero-content">
+      <p class="hero-eyebrow">FAQ</p>
+      <h1 style="font-size: clamp(36px, 5vw, 64px);">Questions, answered.</h1>
+      <p>Everything you need to know before your first visit.</p>
+    </div>
+  </section>
+
+  <section class="faq-section">
+
+    <!-- GROOMING -->
+    <div class="faq-category">
+      <p class="faq-category-title">✂️ Grooming</p>
+
+      <div class="faq-item">
+        <button class="faq-question" aria-expanded="false">
+          <h3>How long does a grooming session take?</h3>
+          <div class="faq-icon">+</div>
+        </button>
+        <div class="faq-answer">
+          <p>It depends on your dog's breed, coat condition and the package chosen. A basic wash typically takes 1 to 1.5 hours, while a full groom or premium package can take 2 to 3 hours. We recommend dropping your pet off and heading out — we'll contact you when they're ready.</p>
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-question" aria-expanded="false">
+          <h3>Do I need to make an appointment for grooming?</h3>
+          <div class="faq-icon">+</div>
+        </button>
+        <div class="faq-answer">
+          <p>Yes, appointments are required so we can give every pet the time and attention they deserve. You can easily book a slot by sending us a WhatsApp message at 011-3602 0431. Walk-ins are welcome but subject to availability.</p>
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-question" aria-expanded="false">
+          <h3>Do you groom all dog breeds?</h3>
+          <div class="faq-icon">+</div>
+        </button>
+        <div class="faq-answer">
+          <p>Yes! We groom all breeds, from small dogs like Chihuahuas and Shih Tzus to larger breeds like Golden Retrievers and Huskies. Our groomers are experienced in breed-specific styling and coat care.</p>
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-question" aria-expanded="false">
+          <h3>What should I bring for the grooming session?</h3>
+          <div class="faq-icon">+</div>
+        </button>
+        <div class="faq-answer">
+          <p>Just bring your dog! However, it helps if you also bring:</p>
+          <ul>
+            <li>Up-to-date vaccination records (for first-time visits)</li>
+            <li>Any specific styling references or photos</li>
+            <li>Your dog's favourite toy or treat to keep them calm</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-question" aria-expanded="false">
+          <h3>My dog is anxious. Can you still groom them?</h3>
+          <div class="faq-icon">+</div>
+        </button>
+        <div class="faq-answer">
+          <p>Absolutely. Our groomers are trained to handle nervous and anxious dogs with patience and a calm approach. We take extra time and never rush the process. Please let us know in advance so we can prepare accordingly.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- PET HOTEL -->
+    <div class="faq-category">
+      <p class="faq-category-title">🏨 Pet Hotel</p>
+
+      <div class="faq-item">
+        <button class="faq-question" aria-expanded="false">
+          <h3>What are the check-in and check-out times?</h3>
+          <div class="faq-icon">+</div>
+        </button>
+        <div class="faq-answer">
+          <p>Check-in is from 10am and check-out is by 7pm, in line with our operating hours (Tuesday to Sunday). If you need an early drop-off or late pick-up, please contact us in advance and we'll do our best to accommodate.</p>
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-question" aria-expanded="false">
+          <h3>What do I need to bring for a hotel stay?</h3>
+          <div class="faq-icon">+</div>
+        </button>
+        <div class="faq-answer">
+          <p>To make your pet's stay as comfortable as possible, please bring:</p>
+          <ul>
+            <li>Vaccination records (mandatory)</li>
+            <li>Your pet's regular food (if they have a specific diet)</li>
+            <li>Any medication with clear instructions</li>
+            <li>A familiar toy or blanket to help them settle in</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-question" aria-expanded="false">
+          <h3>Is my pet supervised at night?</h3>
+          <div class="faq-icon">+</div>
+        </button>
+        <div class="faq-answer">
+          <p>Yes. Our team provides 24/7 supervision throughout your pet's stay. They are never left alone and will have access to fresh water at all times. Your pet's safety and comfort is our top priority.</p>
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-question" aria-expanded="false">
+          <h3>Will I get updates on my pet while they're staying?</h3>
+          <div class="faq-icon">+</div>
+        </button>
+        <div class="faq-answer">
+          <p>Yes! VIP package guests receive daily photo updates via WhatsApp. For other packages, you're always welcome to message us for an update anytime — we're happy to let you know how your pet is doing.</p>
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-question" aria-expanded="false">
+          <h3>Can my dog stay if they are not vaccinated?</h3>
+          <div class="faq-icon">+</div>
+        </button>
+        <div class="faq-answer">
+          <p>For the safety of all pets in our care, vaccination records are mandatory for hotel stays. We require proof of up-to-date vaccination for rabies, distemper and parvovirus at minimum. Please bring the vaccination booklet on check-in.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- GENERAL -->
+    <div class="faq-category">
+      <p class="faq-category-title">💬 General</p>
+
+      <div class="faq-item">
+        <button class="faq-question" aria-expanded="false">
+          <h3>What are your opening hours?</h3>
+          <div class="faq-icon">+</div>
+        </button>
+        <div class="faq-answer">
+          <p>We are open Tuesday to Sunday, from 10am to 7pm. We are closed on Mondays. Public holiday availability may vary — please check with us via WhatsApp to confirm.</p>
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-question" aria-expanded="false">
+          <h3>Where are you located?</h3>
+          <div class="faq-icon">+</div>
+        </button>
+        <div class="faq-answer">
+          <p>We are located at 83, Jalan Seri Impian 1, Taman Impian Emas, 83100 Skudai, Johor. You can tap the "Get Directions" button on any page of this website to open Google Maps and navigate directly to us.</p>
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-question" aria-expanded="false">
+          <h3>How do I make a booking?</h3>
+          <div class="faq-icon">+</div>
+        </button>
+        <div class="faq-answer">
+          <p>The easiest way is to WhatsApp us at 011-3602 0431. Just let us know your dog's name, breed, the service you'd like and your preferred date and time. We'll confirm your slot as soon as possible.</p>
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-question" aria-expanded="false">
+          <h3>What payment methods do you accept?</h3>
+          <div class="faq-icon">+</div>
+        </button>
+        <div class="faq-answer">
+          <p>We accept cash and online transfers (DuitNow / bank transfer). Payment is typically made upon completion of the service or at check-out for hotel stays.</p>
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-question" aria-expanded="false">
+          <h3>Do you offer any discounts or packages?</h3>
+          <div class="faq-icon">+</div>
+        </button>
+        <div class="faq-answer">
+          <p>We occasionally run promotions for returning customers and special occasions. The best way to stay updated is to follow us on social media or ask us directly via WhatsApp. Loyal customers are always appreciated!</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- STILL HAVE QUESTIONS CTA -->
+    <div class="faq-cta">
+      <h3>Still have a question?</h3>
+      <p>We're happy to help. Send us a message and we'll get back to you shortly.</p>
+      <a href="https://wa.me/601136020431" target="_blank" class="btn-primary">WhatsApp Us</a>
+    </div>
+
+  </section>
+
+  <!-- LOCATION -->
+  <section class="location-section">
+    <div class="location-inner">
+      <div class="location-text">
+        <p class="eyebrow">Find Us</p>
+        <h2>Come visit us in Skudai, Johor.</h2>
+        <p>Drop by our shop anytime during opening hours — we would love to meet you and your pet.</p>
+        <div class="location-details">
+          <div class="location-detail">
+            <div class="detail-icon">📍</div>
+            <div>
+              <p class="detail-label">Address</p>
+              <p class="detail-value">83, Jalan Seri Impian 1, Taman Impian Emas,<br>83100 Skudai, Johor</p>
+            </div>
+          </div>
+          <div class="location-detail">
+            <div class="detail-icon">🕐</div>
+            <div>
+              <p class="detail-label">Opening Hours</p>
+              <p class="detail-value">Tuesday – Sunday: 10am – 7pm</p>
+            </div>
+          </div>
+          <div class="location-detail">
+            <div class="detail-icon">📞</div>
+            <div>
+              <p class="detail-label">WhatsApp / Phone</p>
+              <p class="detail-value">011-3602 0431</p>
+            </div>
+          </div>
+        </div>
+        <a href="https://www.google.com/maps/dir/?api=1&destination=83+Jalan+Seri+Impian+1+Taman+Impian+Emas+83100+Skudai+Johor" target="_blank" class="directions-btn">
+          <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>
+          Get Directions
+        </a>
+      </div>
+      <div class="map-container">
+        <iframe
+          src="https://maps.google.com/maps?q=83+Jalan+Seri+Impian+1,+Taman+Impian+Emas,+83100+Skudai,+Johor&output=embed&z=16"
+          allowfullscreen loading="lazy"
+          referrerpolicy="no-referrer-when-downgrade"
+          title="V Pet location map">
+        </iframe>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <p>© 2026 V Pet Grooming & Pet Hotel Services, Skudai Johor</p>
+    <div class="footer-links">
+      <a href="grooming.html">Grooming</a>
+      <a href="hotel.html">Hotel</a>
+      <a href="adoption.html">Adoption</a>
+      <a href="faq.html">FAQ</a>
+      <a href="about.html">About</a>
+    </div>
+  </footer>
+
+  <script>
+    document.querySelectorAll('.faq-question').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const item = btn.parentElement;
+        const isOpen = item.classList.contains('open');
+        // Close all
+        document.querySelectorAll('.faq-item').forEach(i => {
+          i.classList.remove('open');
+          i.querySelector('.faq-question').setAttribute('aria-expanded', 'false');
+        });
+        // Open clicked if it wasn't open
+        if (!isOpen) {
+          item.classList.add('open');
+          btn.setAttribute('aria-expanded', 'true');
+        }
+      });
+    });
+  </script>
+
+
+  <!-- Mobile Menu -->
+  <div class="mobile-menu" id="mobileMenu">
+    <a href="index.html">Home</a>
+    <a href="grooming.html">Grooming</a>
+    <a href="hotel.html">Pet Hotel</a>
+    <a href="products.html">Products</a>
+    <a href="adoption.html">Adoption</a>
+    <a href="about.html">About</a>
+    <a href="faq.html" class="active">FAQ</a>
+    <a href="https://wa.me/601136020431" target="_blank" class="mobile-cta">Book Now</a>
+  </div>
+
+  <script>
+    const hamburger = document.getElementById("hamburger");
+    const mobileMenu = document.getElementById("mobileMenu");
+    hamburger.addEventListener("click", () => {
+      const isOpen = mobileMenu.classList.toggle("open");
+      hamburger.classList.toggle("open");
+      hamburger.setAttribute("aria-expanded", isOpen);
+      document.body.style.overflow = isOpen ? "hidden" : "";
+    });
+    // Close on link click
+    mobileMenu.querySelectorAll("a").forEach(link => {
+      link.addEventListener("click", () => {
+        mobileMenu.classList.remove("open");
+        hamburger.classList.remove("open");
+        hamburger.setAttribute("aria-expanded", false);
+        document.body.style.overflow = "";
+      });
+    });
+  </script>
+</body>
+</html>
