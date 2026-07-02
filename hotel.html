@@ -44,71 +44,133 @@
   <div class="pricing-section">
     <div class="section-header">
       <p class="eyebrow">Pricing</p>
-      <h2>Simple, clear pricing.</h2>
+      <h2>Clear, honest pricing.</h2>
       <p class="sub">All stays include meals and daily care. Prices may change during festival days.</p>
     </div>
 
-    <!-- Pet Hotel -->
-    <div style="max-width:700px;margin:0 auto 56px;">
-      <h3 style="font-size:22px;font-weight:700;letter-spacing:-0.3px;margin-bottom:6px;color:var(--black);">Pet Hotel</h3>
-      <p style="font-size:14px;color:var(--grey);margin-bottom:24px;">Per night rate, meals included</p>
-      <div style="overflow-x:auto;">
-        <table style="width:100%;border-collapse:collapse;font-size:14px;">
-          <thead>
-            <tr style="border-bottom:2px solid var(--border);">
-              <th style="text-align:left;padding:12px 16px;color:var(--grey);font-weight:600;font-size:12px;letter-spacing:0.08em;text-transform:uppercase;">Package</th>
-              <th style="text-align:center;padding:12px 16px;color:var(--grey);font-weight:600;font-size:12px;letter-spacing:0.08em;text-transform:uppercase;">Dog</th>
-              <th style="text-align:center;padding:12px 16px;color:var(--grey);font-weight:600;font-size:12px;letter-spacing:0.08em;text-transform:uppercase;">Cat</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr style="border-bottom:1px solid var(--border);">
-              <td style="padding:14px 16px;font-weight:500;">Small</td>
-              <td style="padding:14px 16px;text-align:center;color:var(--blue);font-weight:600;">RM 50</td>
-              <td style="padding:14px 16px;text-align:center;color:var(--blue);font-weight:600;">RM 50</td>
-            </tr>
-            <tr style="border-bottom:1px solid var(--border);background:#FAFAFA;">
-              <td style="padding:14px 16px;font-weight:500;">Medium</td>
-              <td style="padding:14px 16px;text-align:center;color:var(--blue);font-weight:600;">RM 65</td>
-              <td style="padding:14px 16px;text-align:center;color:var(--blue);font-weight:600;">RM 65</td>
-            </tr>
-            <tr>
-              <td style="padding:14px 16px;font-weight:500;">VIP</td>
-              <td style="padding:14px 16px;text-align:center;color:var(--blue);font-weight:600;">RM 85</td>
-              <td style="padding:14px 16px;text-align:center;color:var(--blue);font-weight:600;">RM 85</td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
-      <p style="font-size:12px;color:var(--grey);margin-top:12px;">* Price may change during festival days.</p>
-    </div>
+    <!-- Two column layout -->
+    <div style="max-width:960px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr;gap:32px;">
 
-    <!-- Day Care -->
-    <div style="max-width:700px;margin:0 auto;">
-      <h3 style="font-size:22px;font-weight:700;letter-spacing:-0.3px;margin-bottom:6px;color:var(--black);">Day Care</h3>
-      <p style="font-size:14px;color:var(--grey);margin-bottom:24px;">11am – 5pm · Drop off & pick up same day</p>
-      <div style="overflow-x:auto;">
-        <table style="width:100%;border-collapse:collapse;font-size:14px;">
-          <thead>
-            <tr style="border-bottom:2px solid var(--border);">
-              <th style="text-align:left;padding:12px 16px;color:var(--grey);font-weight:600;font-size:12px;letter-spacing:0.08em;text-transform:uppercase;">Pet</th>
-              <th style="text-align:center;padding:12px 16px;color:var(--grey);font-weight:600;font-size:12px;letter-spacing:0.08em;text-transform:uppercase;">Weekdays</th>
-              <th style="text-align:center;padding:12px 16px;color:var(--grey);font-weight:600;font-size:12px;letter-spacing:0.08em;text-transform:uppercase;">Weekend</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr style="border-bottom:1px solid var(--border);">
-              <td style="padding:14px 16px;font-weight:500;">🐶 Dog</td>
-              <td style="padding:14px 16px;text-align:center;color:var(--blue);font-weight:600;">RM 40/day</td>
-              <td style="padding:14px 16px;text-align:center;color:var(--blue);font-weight:600;">RM 50/day</td>
-            </tr>
-            <tr style="background:#FAFAFA;">
-              <td style="padding:14px 16px;font-weight:500;">🐱 Cat</td>
-              <td style="padding:14px 16px;text-align:center;color:var(--blue);font-weight:600;">RM 20/day</td>
-              <td style="padding:14px 16px;text-align:center;color:var(--blue);font-weight:600;">RM 25/day</td>
-            </tr>
-          </tbody>
-        </table>
+      <!-- Pet Hotel -->
+      <div>
+        <div style="display:flex;align-items:center;gap:12px;margin-bottom:24px;">
+          <div style="width:40px;height:40px;background:var(--black);border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:20px;">🏨</div>
+          <div>
+            <h3 style="font-size:20px;font-weight:700;letter-spacing:-0.3px;">Pet Hotel</h3>
+            <p style="font-size:13px;color:var(--grey);">Per night · meals included</p>
+          </div>
+        </div>
+
+        <!-- Dog -->
+        <p style="font-size:11px;font-weight:600;letter-spacing:0.12em;text-transform:uppercase;color:var(--blue);margin-bottom:12px;">🐶 Dog</p>
+        <div style="background:var(--white);border:1px solid var(--border);border-radius:16px;overflow:hidden;margin-bottom:16px;">
+          <div style="display:flex;justify-content:space-between;align-items:center;padding:16px 20px;border-bottom:1px solid var(--border);">
+            <span style="font-size:14px;font-weight:500;">Small</span>
+            <span style="font-size:18px;font-weight:700;color:var(--blue);">RM 50</span>
+          </div>
+          <div style="display:flex;justify-content:space-between;align-items:center;padding:16px 20px;border-bottom:1px solid var(--border);background:#FAFAFA;">
+            <div style="display:flex;align-items:center;gap:8px;">
+              <span style="font-size:14px;font-weight:500;">Medium</span>
+            </div>
+            <span style="font-size:18px;font-weight:700;color:var(--blue);">RM 65</span>
+          </div>
+          <div style="display:flex;justify-content:space-between;align-items:center;padding:16px 20px;background:var(--black);">
+            <div>
+              <span style="font-size:14px;font-weight:600;color:white;">VIP</span>
+              <span style="display:block;font-size:11px;color:rgba(255,255,255,0.4);">Premium suite</span>
+            </div>
+            <span style="font-size:18px;font-weight:700;color:#6EC6FF;">RM 85</span>
+          </div>
+        </div>
+
+        <!-- Cat -->
+        <p style="font-size:11px;font-weight:600;letter-spacing:0.12em;text-transform:uppercase;color:#F472B6;margin-bottom:12px;">🐱 Cat</p>
+        <div style="background:var(--white);border:1px solid var(--border);border-radius:16px;overflow:hidden;">
+          <div style="display:flex;justify-content:space-between;align-items:center;padding:16px 20px;border-bottom:1px solid var(--border);">
+            <span style="font-size:14px;font-weight:500;">Small</span>
+            <span style="font-size:18px;font-weight:700;color:var(--blue);">RM 50</span>
+          </div>
+          <div style="display:flex;justify-content:space-between;align-items:center;padding:16px 20px;border-bottom:1px solid var(--border);background:#FAFAFA;">
+            <span style="font-size:14px;font-weight:500;">Medium</span>
+            <span style="font-size:18px;font-weight:700;color:var(--blue);">RM 65</span>
+          </div>
+          <div style="display:flex;justify-content:space-between;align-items:center;padding:16px 20px;background:var(--black);">
+            <div>
+              <span style="font-size:14px;font-weight:600;color:white;">VIP</span>
+              <span style="display:block;font-size:11px;color:rgba(255,255,255,0.4);">Premium suite</span>
+            </div>
+            <span style="font-size:18px;font-weight:700;color:#6EC6FF;">RM 85</span>
+          </div>
+        </div>
+        <p style="font-size:12px;color:var(--grey);margin-top:12px;">* Price may change during festival days.</p>
+      </div>
+
+      <!-- Day Care -->
+      <div>
+        <div style="display:flex;align-items:center;gap:12px;margin-bottom:24px;">
+          <div style="width:40px;height:40px;background:var(--blue);border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:20px;">☀️</div>
+          <div>
+            <h3 style="font-size:20px;font-weight:700;letter-spacing:-0.3px;">Day Care</h3>
+            <p style="font-size:13px;color:var(--grey);">11am – 5pm · same day</p>
+          </div>
+        </div>
+
+        <!-- Dog Day Care -->
+        <p style="font-size:11px;font-weight:600;letter-spacing:0.12em;text-transform:uppercase;color:var(--blue);margin-bottom:12px;">🐶 Dog</p>
+        <div style="background:var(--white);border:1px solid var(--border);border-radius:16px;overflow:hidden;margin-bottom:16px;">
+          <div style="display:flex;justify-content:space-between;align-items:center;padding:16px 20px;border-bottom:1px solid var(--border);">
+            <div>
+              <span style="font-size:14px;font-weight:500;">Weekdays</span>
+              <span style="display:block;font-size:12px;color:var(--grey);">Tue – Fri</span>
+            </div>
+            <span style="font-size:18px;font-weight:700;color:var(--blue);">RM 40<span style="font-size:12px;font-weight:400;color:var(--grey);">/day</span></span>
+          </div>
+          <div style="display:flex;justify-content:space-between;align-items:center;padding:16px 20px;background:#FAFAFA;">
+            <div>
+              <span style="font-size:14px;font-weight:500;">Weekend</span>
+              <span style="display:block;font-size:12px;color:var(--grey);">Sat – Sun</span>
+            </div>
+            <span style="font-size:18px;font-weight:700;color:var(--blue);">RM 50<span style="font-size:12px;font-weight:400;color:var(--grey);">/day</span></span>
+          </div>
+        </div>
+
+        <!-- Cat Day Care -->
+        <p style="font-size:11px;font-weight:600;letter-spacing:0.12em;text-transform:uppercase;color:#F472B6;margin-bottom:12px;">🐱 Cat</p>
+        <div style="background:var(--white);border:1px solid var(--border);border-radius:16px;overflow:hidden;">
+          <div style="display:flex;justify-content:space-between;align-items:center;padding:16px 20px;border-bottom:1px solid var(--border);">
+            <div>
+              <span style="font-size:14px;font-weight:500;">Weekdays</span>
+              <span style="display:block;font-size:12px;color:var(--grey);">Tue – Fri</span>
+            </div>
+            <span style="font-size:18px;font-weight:700;color:var(--blue);">RM 20<span style="font-size:12px;font-weight:400;color:var(--grey);">/day</span></span>
+          </div>
+          <div style="display:flex;justify-content:space-between;align-items:center;padding:16px 20px;background:#FAFAFA;">
+            <div>
+              <span style="font-size:14px;font-weight:500;">Weekend</span>
+              <span style="display:block;font-size:12px;color:var(--grey);">Sat – Sun</span>
+            </div>
+            <span style="font-size:18px;font-weight:700;color:var(--blue);">RM 25<span style="font-size:12px;font-weight:400;color:var(--grey);">/day</span></span>
+          </div>
+        </div>
+
+        <!-- Included -->
+        <div style="background:var(--light);border-radius:16px;padding:20px;margin-top:20px;">
+          <p style="font-size:12px;font-weight:600;letter-spacing:0.1em;text-transform:uppercase;color:var(--grey);margin-bottom:12px;">What's included</p>
+          <div style="display:flex;flex-direction:column;gap:8px;">
+            <div style="display:flex;align-items:center;gap:10px;font-size:13px;color:var(--black);">
+              <span style="color:var(--blue);font-weight:700;">✓</span> Meals & fresh water
+            </div>
+            <div style="display:flex;align-items:center;gap:10px;font-size:13px;color:var(--black);">
+              <span style="color:var(--blue);font-weight:700;">✓</span> Daily walks & playtime
+            </div>
+            <div style="display:flex;align-items:center;gap:10px;font-size:13px;color:var(--black);">
+              <span style="color:var(--blue);font-weight:700;">✓</span> 24/7 supervision
+            </div>
+            <div style="display:flex;align-items:center;gap:10px;font-size:13px;color:var(--black);">
+              <span style="color:var(--blue);font-weight:700;">✓</span> WhatsApp updates on request
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   </div>
