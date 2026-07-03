@@ -72,7 +72,7 @@
   <div class="cta-section">
     <h2>Ready to give a dog a home?</h2>
     <p>Reach out to us today. We'd love to help you find the right match.</p>
-    <a href="https://wa.me/601136020431" target="_blank" class="btn-primary">WhatsApp 011-3602 0431</a>
+    <a href="https://wa.me/601136020431" target="_blank" class="btn-primary cfg-whatsapp">WhatsApp 011-3602 0431</a>
   </div>
 
   <!-- LOCATION -->
@@ -87,14 +87,14 @@
             <div class="detail-icon">📍</div>
             <div>
               <p class="detail-label">Address</p>
-              <p class="detail-value">83, Jalan Seri Impian 1, Taman Impian Emas,<br>83100 Skudai, Johor</p>
+              <p class="detail-value cfg-address">83, Jalan Seri Impian 1, Taman Impian Emas, 83100 Skudai, Johor</p>
             </div>
           </div>
           <div class="location-detail">
             <div class="detail-icon">🕐</div>
             <div>
               <p class="detail-label">Opening Hours</p>
-              <p class="detail-value">Tuesday – Sunday: 10am – 7pm</p>
+              <p class="detail-value cfg-hours">Tuesday – Sunday: 10am – 7pm</p>
             </div>
           </div>
           <div class="location-detail">
@@ -105,7 +105,7 @@
             </div>
             <div>
               <p class="detail-label">WhatsApp / Phone</p>
-              <p class="detail-value">011-3602 0431</p>
+              <p class="detail-value cfg-phone">011-3602 0431</p>
             </div>
           </div>
         </div>
@@ -167,6 +167,44 @@
         hamburger.setAttribute("aria-expanded", false);
         document.body.style.overflow = "";
       });
+    });
+  </script>
+
+  <script src="config.js"></script>
+  <script>
+    // Apply config to page
+    document.addEventListener("DOMContentLoaded", () => {
+      const c = VPetConfig;
+
+      // Update all phone numbers
+      document.querySelectorAll(".cfg-phone").forEach(el => el.textContent = c.phone);
+
+      // Update all WhatsApp links
+      document.querySelectorAll(".cfg-whatsapp").forEach(el => {
+        el.href = "https://wa.me/" + c.whatsapp;
+        if (el.textContent.includes("WhatsApp")) el.textContent = "WhatsApp " + c.phone;
+      });
+
+      // Update hours
+      document.querySelectorAll(".cfg-hours").forEach(el =>
+        el.textContent = c.openingDays + ": " + c.openingHours
+      );
+
+      // Update address
+      document.querySelectorAll(".cfg-address").forEach(el => el.textContent = c.address);
+
+      // Update nav Book Now WhatsApp link
+      document.querySelectorAll("a.nav-cta, a.mobile-cta").forEach(el => {
+        if (el.href.includes("wa.me")) el.href = "https://wa.me/" + c.whatsapp;
+      });
+
+      // Promo banner
+      if (c.showBanner) {
+        const banner = document.createElement("div");
+        banner.style.cssText = "background:#0071E3;color:white;text-align:center;padding:10px 24px;font-size:13px;font-weight:500;position:relative;z-index:201;";
+        banner.innerHTML = c.bannerText + ' <a href="https://wa.me/' + c.whatsapp + '" style="color:white;text-decoration:underline;margin-left:8px;">Book now →</a>';
+        document.body.insertBefore(banner, document.body.firstChild);
+      }
     });
   </script>
 </body>
