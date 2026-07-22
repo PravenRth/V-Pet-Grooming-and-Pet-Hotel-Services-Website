@@ -5,11 +5,74 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Pet Grooming — V Pet</title>
   <link rel="stylesheet" href="style.css" />
+  <style>
+    /* ── Grooming pricing (scoped to this page) ── */
+    .groom-tabs-wrap { display:flex; justify-content:center; margin-bottom:40px; padding:0 16px; }
+    .groom-tabs {
+      background:var(--light); border-radius:30px; padding:4px;
+      display:inline-flex; gap:4px; width:100%; max-width:360px;
+    }
+    .groom-tab-btn {
+      flex:1; padding:10px 20px; border-radius:26px; border:none; cursor:pointer;
+      font-size:14px; font-weight:600; background:transparent; color:var(--grey);
+      transition:background 0.2s, color 0.2s; font-family:var(--font);
+    }
+    .groom-tab-btn.active { background:var(--black); color:#fff; }
+
+    .groom-tab-panel { max-width:860px; margin:0 auto; padding:0 16px; }
+    .groom-tab-note { font-size:14px; color:var(--grey); text-align:center; margin-bottom:28px; }
+    .groom-foot-note { font-size:12px; color:var(--grey); text-align:center; margin-top:8px; }
+
+    .groom-grid {
+      display:grid;
+      grid-template-columns:repeat(3, 1fr);
+      gap:16px;
+      margin-bottom:8px;
+    }
+
+    .groom-card {
+      background:var(--white); border:1px solid var(--border); border-radius:18px;
+      overflow:hidden; position:relative;
+    }
+    .groom-card.featured { border:2px solid var(--blue); }
+    .groom-card-badge {
+      position:absolute; top:14px; right:14px; background:var(--blue); color:#fff;
+      font-size:10px; font-weight:700; letter-spacing:0.08em; text-transform:uppercase;
+      padding:4px 10px; border-radius:20px;
+    }
+    .groom-card-head { padding:18px 22px; background:var(--black); }
+    .groom-card.featured .groom-card-head { background:var(--blue); }
+    .groom-card-head .size-label {
+      font-size:11px; font-weight:600; letter-spacing:0.12em; text-transform:uppercase;
+      color:rgba(255,255,255,0.55); margin-bottom:4px; display:block;
+    }
+    .groom-card-head h3 { font-size:22px; font-weight:700; color:#fff; letter-spacing:-0.4px; }
+
+    .groom-card-body { padding:18px 22px; display:flex; flex-direction:column; gap:12px; }
+    .groom-row {
+      display:flex; justify-content:space-between; align-items:center;
+      padding-bottom:12px; border-bottom:1px solid var(--border); gap:10px;
+    }
+    .groom-row:last-child { border-bottom:none; padding-bottom:0; }
+    .groom-row .label { font-size:14px; color:var(--grey); line-height:1.3; }
+    .groom-row .label .sub { display:block; font-size:11px; color:var(--blue); margin-top:2px; }
+    .groom-row .price { font-size:15px; font-weight:700; color:var(--blue); white-space:nowrap; }
+
+    /* ── Mobile ── */
+    @media (max-width: 720px) {
+      .groom-grid { grid-template-columns:1fr; gap:14px; }
+      .groom-card-head { padding:16px 20px; }
+      .groom-card-head h3 { font-size:19px; }
+      .groom-card-body { padding:16px 20px; }
+      .groom-tab-btn { font-size:13px; padding:10px 14px; }
+      .groom-card-badge { top:12px; right:12px; }
+    }
+  </style>
 </head>
 <body>
 
   <nav class="nav">
-    <a href="index.html" class="nav-logo">🐾 V Pet <sup>Skudai</sup></a>
+    <a href="index.html" class="nav-logo">V Pet <sup>Skudai</sup></a>
     <ul class="nav-links">
       <li><a href="index.html">Home</a></li>
       <li><a href="grooming.html">Grooming</a></li>
@@ -48,186 +111,231 @@
       <p class="sub">All prices are starting rates. Extra charges may apply for extra large or aggressive breeds.</p>
     </div>
 
-    <!-- Toggle -->
-    <div style="display:flex;justify-content:center;margin-bottom:48px;">
-      <div style="background:var(--light);border-radius:30px;padding:4px;display:inline-flex;gap:4px;">
-        <button onclick="showTab('basic')" id="tab-basic"
-          style="padding:10px 28px;border-radius:26px;border:none;cursor:pointer;font-size:14px;font-weight:600;background:var(--black);color:white;transition:all 0.2s;">
-          Basic Grooming
-        </button>
-        <button onclick="showTab('full')" id="tab-full"
-          style="padding:10px 28px;border-radius:26px;border:none;cursor:pointer;font-size:14px;font-weight:600;background:transparent;color:var(--grey);transition:all 0.2s;">
-          Full Grooming
-        </button>
+    <div class="groom-tabs-wrap">
+      <div class="groom-tabs">
+        <button class="groom-tab-btn active" onclick="showTab('basic')" id="tab-basic">Basic Grooming</button>
+        <button class="groom-tab-btn" onclick="showTab('full')" id="tab-full">Full Grooming</button>
       </div>
     </div>
 
     <!-- Basic Grooming Tab -->
-    <div id="tab-content-basic" style="max-width:860px;margin:0 auto;">
-      <p style="font-size:14px;color:var(--grey);text-align:center;margin-bottom:32px;">Bath · Blow dry · Ear cleaning · Nail trim · Teeth brushing</p>
-      <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-bottom:20px;">
+    <div id="tab-content-basic" class="groom-tab-panel">
+      <p class="groom-tab-note">Bath · Blow dry · Ear cleaning · Nail trim · Teeth brushing</p>
+      <div class="groom-grid">
 
-        <!-- Small -->
-        <div style="background:var(--white);border:1px solid var(--border);border-radius:18px;overflow:hidden;">
-          <div style="background:var(--black);padding:20px 24px;">
-            <p style="font-size:11px;font-weight:600;letter-spacing:0.15em;text-transform:uppercase;color:rgba(255,255,255,0.5);margin-bottom:4px;">Size</p>
-            <h3 style="font-size:24px;font-weight:700;color:white;letter-spacing:-0.5px;">Small</h3>
-          </div>
-          <div style="padding:20px 24px;display:flex;flex-direction:column;gap:12px;">
-            <div style="display:flex;justify-content:space-between;align-items:center;padding-bottom:12px;border-bottom:1px solid var(--border);">
-              <span style="font-size:14px;color:var(--grey);">Short Coat</span>
-              <span style="font-size:15px;font-weight:700;color:var(--blue);">RM 50+</span>
-            </div>
-            <div style="display:flex;justify-content:space-between;align-items:center;padding-bottom:12px;border-bottom:1px solid var(--border);">
-              <span style="font-size:14px;color:var(--grey);">Medium Coat</span>
-              <span style="font-size:15px;font-weight:700;color:var(--blue);">RM 60+</span>
-            </div>
-            <div style="display:flex;justify-content:space-between;align-items:center;padding-bottom:12px;border-bottom:1px solid var(--border);">
-              <span style="font-size:14px;color:var(--grey);">Long Coat</span>
-              <span style="font-size:15px;font-weight:700;color:var(--blue);">RM 70+</span>
-            </div>
-            <div style="display:flex;justify-content:space-between;align-items:center;">
-              <span style="font-size:14px;color:var(--grey);">Cat</span>
-              <span style="font-size:15px;font-weight:700;color:var(--blue);">RM 65+</span>
-            </div>
+        <div class="groom-card">
+          <div class="groom-card-head"><span class="size-label">Size</span><h3>Small</h3></div>
+          <div class="groom-card-body">
+            <div class="groom-row"><span class="label">Short Coat</span><span class="price">RM 50+</span></div>
+            <div class="groom-row"><span class="label">Medium Coat</span><span class="price">RM 60+</span></div>
+            <div class="groom-row"><span class="label">Long Coat</span><span class="price">RM 70+</span></div>
+            <div class="groom-row"><span class="label">Cat</span><span class="price">RM 65+</span></div>
           </div>
         </div>
 
-        <!-- Medium -->
-        <div style="background:var(--white);border:2px solid var(--blue);border-radius:18px;overflow:hidden;position:relative;">
-          <div style="position:absolute;top:14px;right:14px;background:var(--blue);color:white;font-size:10px;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;padding:4px 10px;border-radius:20px;">Popular</div>
-          <div style="background:var(--blue);padding:20px 24px;">
-            <p style="font-size:11px;font-weight:600;letter-spacing:0.15em;text-transform:uppercase;color:rgba(255,255,255,0.6);margin-bottom:4px;">Size</p>
-            <h3 style="font-size:24px;font-weight:700;color:white;letter-spacing:-0.5px;">Medium</h3>
-          </div>
-          <div style="padding:20px 24px;display:flex;flex-direction:column;gap:12px;">
-            <div style="display:flex;justify-content:space-between;align-items:center;padding-bottom:12px;border-bottom:1px solid var(--border);">
-              <span style="font-size:14px;color:var(--grey);">Short Coat</span>
-              <span style="font-size:15px;font-weight:700;color:var(--blue);">RM 65+</span>
-            </div>
-            <div style="display:flex;justify-content:space-between;align-items:center;padding-bottom:12px;border-bottom:1px solid var(--border);">
-              <span style="font-size:14px;color:var(--grey);">Medium Coat</span>
-              <span style="font-size:15px;font-weight:700;color:var(--blue);">RM 75+</span>
-            </div>
-            <div style="display:flex;justify-content:space-between;align-items:center;padding-bottom:12px;border-bottom:1px solid var(--border);">
-              <span style="font-size:14px;color:var(--grey);">Long Coat</span>
-              <span style="font-size:15px;font-weight:700;color:var(--blue);">RM 85+</span>
-            </div>
-            <div style="display:flex;justify-content:space-between;align-items:center;">
-              <span style="font-size:14px;color:var(--grey);">Cat</span>
-              <span style="font-size:15px;font-weight:700;color:var(--blue);">RM 75+</span>
-            </div>
+        <div class="groom-card featured">
+          <div class="groom-card-badge">Popular</div>
+          <div class="groom-card-head"><span class="size-label">Size</span><h3>Medium</h3></div>
+          <div class="groom-card-body">
+            <div class="groom-row"><span class="label">Short Coat</span><span class="price">RM 65+</span></div>
+            <div class="groom-row"><span class="label">Medium Coat</span><span class="price">RM 75+</span></div>
+            <div class="groom-row"><span class="label">Long Coat</span><span class="price">RM 85+</span></div>
+            <div class="groom-row"><span class="label">Cat</span><span class="price">RM 75+</span></div>
           </div>
         </div>
 
-        <!-- Large -->
-        <div style="background:var(--white);border:1px solid var(--border);border-radius:18px;overflow:hidden;">
-          <div style="background:var(--black);padding:20px 24px;">
-            <p style="font-size:11px;font-weight:600;letter-spacing:0.15em;text-transform:uppercase;color:rgba(255,255,255,0.5);margin-bottom:4px;">Size</p>
-            <h3 style="font-size:24px;font-weight:700;color:white;letter-spacing:-0.5px;">Large</h3>
-          </div>
-          <div style="padding:20px 24px;display:flex;flex-direction:column;gap:12px;">
-            <div style="display:flex;justify-content:space-between;align-items:center;padding-bottom:12px;border-bottom:1px solid var(--border);">
-              <span style="font-size:14px;color:var(--grey);">Short Coat</span>
-              <span style="font-size:15px;font-weight:700;color:var(--blue);">RM 75+</span>
-            </div>
-            <div style="display:flex;justify-content:space-between;align-items:center;padding-bottom:12px;border-bottom:1px solid var(--border);">
-              <span style="font-size:14px;color:var(--grey);">Medium Coat</span>
-              <span style="font-size:15px;font-weight:700;color:var(--blue);">RM 85+</span>
-            </div>
-            <div style="display:flex;justify-content:space-between;align-items:center;padding-bottom:12px;border-bottom:1px solid var(--border);">
-              <span style="font-size:14px;color:var(--grey);">Long Coat</span>
-              <span style="font-size:15px;font-weight:700;color:var(--blue);">RM 110+</span>
-            </div>
-            <div style="display:flex;justify-content:space-between;align-items:center;">
-              <span style="font-size:14px;color:var(--grey);">Cat</span>
-              <span style="font-size:15px;font-weight:700;color:var(--blue);">RM 85+</span>
-            </div>
+        <div class="groom-card">
+          <div class="groom-card-head"><span class="size-label">Size</span><h3>Large</h3></div>
+          <div class="groom-card-body">
+            <div class="groom-row"><span class="label">Short Coat</span><span class="price">RM 75+</span></div>
+            <div class="groom-row"><span class="label">Medium Coat</span><span class="price">RM 85+</span></div>
+            <div class="groom-row"><span class="label">Long Coat</span><span class="price">RM 110+</span></div>
+            <div class="groom-row"><span class="label">Cat</span><span class="price">RM 85+</span></div>
           </div>
         </div>
       </div>
-      <p style="font-size:12px;color:var(--grey);text-align:center;">* Extra large & aggressive behaviour will have extra charges.</p>
+      <p class="groom-foot-note">* Extra large & aggressive behaviour will have extra charges.</p>
     </div>
 
     <!-- Full Grooming Tab -->
-    <div id="tab-content-full" style="max-width:860px;margin:0 auto;display:none;">
-      <p style="font-size:14px;color:var(--grey);text-align:center;margin-bottom:32px;">Everything in Basic + full body styling or hand cut</p>
-      <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-bottom:20px;">
+    <div id="tab-content-full" class="groom-tab-panel" style="display:none;">
+      <p class="groom-tab-note">Everything in Basic + full body styling or hand cut</p>
+      <div class="groom-grid">
 
-        <!-- Small -->
-        <div style="background:var(--white);border:1px solid var(--border);border-radius:18px;overflow:hidden;">
-          <div style="background:var(--black);padding:20px 24px;">
-            <p style="font-size:11px;font-weight:600;letter-spacing:0.15em;text-transform:uppercase;color:rgba(255,255,255,0.5);margin-bottom:4px;">Size</p>
-            <h3 style="font-size:24px;font-weight:700;color:white;letter-spacing:-0.5px;">Small</h3>
-          </div>
-          <div style="padding:20px 24px;display:flex;flex-direction:column;gap:12px;">
-            <div style="display:flex;justify-content:space-between;align-items:center;padding-bottom:12px;border-bottom:1px solid var(--border);">
-              <div><span style="font-size:14px;color:var(--grey);">Full Grooming</span><br><span style="font-size:11px;color:var(--blue);">Dog</span></div>
-              <span style="font-size:15px;font-weight:700;color:var(--blue);">RM 110+</span>
-            </div>
-            <div style="display:flex;justify-content:space-between;align-items:center;padding-bottom:12px;border-bottom:1px solid var(--border);">
-              <div><span style="font-size:14px;color:var(--grey);">Full Hand Cut</span><br><span style="font-size:11px;color:var(--blue);">Dog</span></div>
-              <span style="font-size:15px;font-weight:700;color:var(--blue);">RM 140+</span>
-            </div>
-            <div style="display:flex;justify-content:space-between;align-items:center;">
-              <div><span style="font-size:14px;color:var(--grey);">Full Grooming</span><br><span style="font-size:11px;color:#F472B6;">Cat</span></div>
-              <span style="font-size:15px;font-weight:700;color:var(--blue);">RM 135</span>
-            </div>
+        <div class="groom-card">
+          <div class="groom-card-head"><span class="size-label">Size</span><h3>Small</h3></div>
+          <div class="groom-card-body">
+            <div class="groom-row"><span class="label">Full Grooming<span class="sub">Dog</span></span><span class="price">RM 110+</span></div>
+            <div class="groom-row"><span class="label">Full Hand Cut<span class="sub">Dog</span></span><span class="price">RM 140+</span></div>
+            <div class="groom-row"><span class="label">Full Grooming<span class="sub">Cat</span></span><span class="price">RM 135</span></div>
           </div>
         </div>
 
-        <!-- Medium -->
-        <div style="background:var(--white);border:2px solid var(--blue);border-radius:18px;overflow:hidden;position:relative;">
-          <div style="position:absolute;top:14px;right:14px;background:var(--blue);color:white;font-size:10px;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;padding:4px 10px;border-radius:20px;">Popular</div>
-          <div style="background:var(--blue);padding:20px 24px;">
-            <p style="font-size:11px;font-weight:600;letter-spacing:0.15em;text-transform:uppercase;color:rgba(255,255,255,0.6);margin-bottom:4px;">Size</p>
-            <h3 style="font-size:24px;font-weight:700;color:white;letter-spacing:-0.5px;">Medium</h3>
-          </div>
-          <div style="padding:20px 24px;display:flex;flex-direction:column;gap:12px;">
-            <div style="display:flex;justify-content:space-between;align-items:center;padding-bottom:12px;border-bottom:1px solid var(--border);">
-              <div><span style="font-size:14px;color:var(--grey);">Full Grooming</span><br><span style="font-size:11px;color:var(--blue);">Dog</span></div>
-              <span style="font-size:15px;font-weight:700;color:var(--blue);">RM 120+</span>
-            </div>
-            <div style="display:flex;justify-content:space-between;align-items:center;">
-              <div><span style="font-size:14px;color:var(--grey);">Full Hand Cut</span><br><span style="font-size:11px;color:var(--blue);">Dog</span></div>
-              <span style="font-size:15px;font-weight:700;color:var(--blue);">RM 150+</span>
-            </div>
+        <div class="groom-card featured">
+          <div class="groom-card-badge">Popular</div>
+          <div class="groom-card-head"><span class="size-label">Size</span><h3>Medium</h3></div>
+          <div class="groom-card-body">
+            <div class="groom-row"><span class="label">Full Grooming<span class="sub">Dog</span></span><span class="price">RM 120+</span></div>
+            <div class="groom-row"><span class="label">Full Hand Cut<span class="sub">Dog</span></span><span class="price">RM 150+</span></div>
           </div>
         </div>
 
-        <!-- Large -->
-        <div style="background:var(--white);border:1px solid var(--border);border-radius:18px;overflow:hidden;">
-          <div style="background:var(--black);padding:20px 24px;">
-            <p style="font-size:11px;font-weight:600;letter-spacing:0.15em;text-transform:uppercase;color:rgba(255,255,255,0.5);margin-bottom:4px;">Size</p>
-            <h3 style="font-size:24px;font-weight:700;color:white;letter-spacing:-0.5px;">Large</h3>
-          </div>
-          <div style="padding:20px 24px;display:flex;flex-direction:column;gap:12px;">
-            <div style="display:flex;justify-content:space-between;align-items:center;padding-bottom:12px;border-bottom:1px solid var(--border);">
-              <div><span style="font-size:14px;color:var(--grey);">Full Grooming</span><br><span style="font-size:11px;color:var(--blue);">Dog</span></div>
-              <span style="font-size:15px;font-weight:700;color:var(--blue);">RM 150+</span>
-            </div>
-            <div style="display:flex;justify-content:space-between;align-items:center;">
-              <div><span style="font-size:14px;color:var(--grey);">Full Hand Cut</span><br><span style="font-size:11px;color:var(--blue);">Dog</span></div>
-              <span style="font-size:15px;font-weight:700;color:var(--blue);">RM 200+</span>
-            </div>
+        <div class="groom-card">
+          <div class="groom-card-head"><span class="size-label">Size</span><h3>Large</h3></div>
+          <div class="groom-card-body">
+            <div class="groom-row"><span class="label">Full Grooming<span class="sub">Dog</span></span><span class="price">RM 150+</span></div>
+            <div class="groom-row"><span class="label">Full Hand Cut<span class="sub">Dog</span></span><span class="price">RM 200+</span></div>
           </div>
         </div>
       </div>
     </div>
   </div>
 
+  <div class="cta-section">
+    <h2>Ready to book a grooming session?</h2>
+    <p>Message us on WhatsApp and we'll confirm your slot.</p>
+    <a href="https://wa.me/601136020431" target="_blank" class="btn-primary cfg-whatsapp">WhatsApp 011-3602 0431</a>
+    <div class="contact-row">
+      <div class="contact-item"><p class="label">Location</p><p class="value">Skudai, Johor</p></div>
+      <div class="contact-item"><p class="label">Opening Hours</p><p class="value cfg-hours">Tue – Sun: 10am – 7pm</p></div>
+    </div>
+  </div>
+
+  <!-- LOCATION -->
+  <section class="location-section">
+    <div class="location-inner">
+      <div class="location-text">
+        <p class="eyebrow">Find Us</p>
+        <h2>Come visit us in Skudai, Johor.</h2>
+        <p>Drop by our shop anytime during opening hours — we would love to meet you and your pet.</p>
+        <div class="location-details">
+          <div class="location-detail">
+            <div class="detail-icon">📍</div>
+            <div>
+              <p class="detail-label">Address</p>
+              <p class="detail-value cfg-address">83, Jalan Seri Impian 1, Taman Impian Emas, 83100 Skudai, Johor</p>
+            </div>
+          </div>
+          <div class="location-detail">
+            <div class="detail-icon">🕐</div>
+            <div>
+              <p class="detail-label">Opening Hours</p>
+              <p class="detail-value cfg-hours">Tuesday – Sunday: 10am – 7pm</p>
+            </div>
+          </div>
+          <div class="location-detail">
+            <div class="detail-icon" style="background:#25D366; padding:0; display:flex; align-items:center; justify-content:center;">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48" width="22" height="22">
+                <path fill="white" d="M24 4C13 4 4 13 4 24c0 3.6 1 7 2.7 10L4 44l10.3-2.7C17.1 43 20.5 44 24 44c11 0 20-9 20-20S35 4 24 4zm0 36c-3.1 0-6.1-.8-8.7-2.4l-.6-.4-6.1 1.6 1.6-5.9-.4-.6C8.8 30.1 8 27.1 8 24 8 15.2 15.2 8 24 8s16 7.2 16 16-7.2 16-16 16zm8.9-11.9c-.5-.2-2.8-1.4-3.2-1.5-.4-.2-.7-.2-1 .2-.3.5-1.1 1.5-1.4 1.8-.3.3-.5.4-1 .1-.5-.2-2-.7-3.8-2.3-1.4-1.2-2.3-2.8-2.6-3.2-.3-.5 0-.7.2-1 .2-.2.5-.5.7-.8.2-.3.3-.5.4-.8.2-.3.1-.6 0-.8-.1-.2-1-2.5-1.4-3.4-.4-.9-.7-.8-1-.8h-.9c-.3 0-.8.1-1.2.6-.4.5-1.6 1.5-1.6 3.7s1.6 4.3 1.9 4.6c.2.3 3.2 4.9 7.8 6.8 1.1.5 1.9.7 2.6.9 1.1.3 2.1.3 2.9.2.9-.1 2.8-1.1 3.2-2.2.4-1.1.4-2 .3-2.2-.2-.3-.5-.4-1-.6z"/>
+              </svg>
+            </div>
+            <div>
+              <p class="detail-label">WhatsApp / Phone</p>
+              <p class="detail-value cfg-phone">011-3602 0431</p>
+            </div>
+          </div>
+        </div>
+        <a href="https://www.google.com/maps/dir/?api=1&destination=83+Jalan+Seri+Impian+1+Taman+Impian+Emas+83100+Skudai+Johor" target="_blank" class="directions-btn">
+          <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>
+          Get Directions
+        </a>
+      </div>
+      <div class="map-container">
+        <iframe
+          src="https://maps.google.com/maps?q=83+Jalan+Seri+Impian+1,+Taman+Impian+Emas,+83100+Skudai,+Johor&output=embed&z=16"
+          allowfullscreen
+          loading="lazy"
+          referrerpolicy="no-referrer-when-downgrade"
+          title="V Pet location map">
+        </iframe>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <p>© 2026 V Pet Grooming & Pet Hotel Services, Skudai</p>
+    <div class="footer-links">
+      <a href="grooming.html">Grooming</a>
+      <a href="hotel.html">Hotel</a>
+      <a href="adoption.html">Adoption</a>
+      <a href="about.html">About</a>
+      <a href="faq.html">FAQ</a>
+    </div>
+  </footer>
+
+  <!-- Mobile Menu -->
+  <div class="mobile-menu" id="mobileMenu">
+    <a href="index.html">Home</a>
+    <a href="grooming.html">Grooming</a>
+    <a href="hotel.html">Pet Hotel</a>
+    <a href="products.html">Products</a>
+    <a href="adoption.html">Adoption</a>
+    <a href="about.html">About</a>
+    <a href="faq.html">FAQ</a>
+    <a href="https://wa.me/601136020431" target="_blank" class="mobile-cta">Book Now</a>
+  </div>
+
+  <script>
+    const hamburger = document.getElementById("hamburger");
+    const mobileMenu = document.getElementById("mobileMenu");
+    hamburger.addEventListener("click", () => {
+      const isOpen = mobileMenu.classList.toggle("open");
+      hamburger.classList.toggle("open");
+      hamburger.setAttribute("aria-expanded", isOpen);
+      document.body.style.overflow = isOpen ? "hidden" : "";
+    });
+    mobileMenu.querySelectorAll("a").forEach(link => {
+      link.addEventListener("click", () => {
+        mobileMenu.classList.remove("open");
+        hamburger.classList.remove("open");
+        hamburger.setAttribute("aria-expanded", false);
+        document.body.style.overflow = "";
+      });
+    });
+  </script>
+
+  <script src="config.js"></script>
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+      if (typeof VPetConfig === "undefined") {
+        console.warn("VPetConfig not found — config.js is missing from this folder. Skipping config-driven content.");
+        return;
+      }
+      const c = VPetConfig;
+
+      document.querySelectorAll(".cfg-phone").forEach(el => el.textContent = c.phone);
+
+      document.querySelectorAll(".cfg-whatsapp").forEach(el => {
+        el.href = "https://wa.me/" + c.whatsapp;
+        if (el.textContent.includes("WhatsApp")) el.textContent = "WhatsApp " + c.phone;
+      });
+
+      document.querySelectorAll(".cfg-hours").forEach(el =>
+        el.textContent = c.openingDays + ": " + c.openingHours
+      );
+
+      document.querySelectorAll(".cfg-address").forEach(el => el.textContent = c.address);
+
+      document.querySelectorAll("a.nav-cta, a.mobile-cta").forEach(el => {
+        if (el.href.includes("wa.me")) el.href = "https://wa.me/" + c.whatsapp;
+      });
+
+      if (c.showBanner) {
+        const banner = document.createElement("div");
+        banner.style.cssText = "background:#0071E3;color:white;text-align:center;padding:10px 24px;font-size:13px;font-weight:500;position:relative;z-index:201;";
+        banner.innerHTML = c.bannerText + ' <a href="https://wa.me/' + c.whatsapp + '" style="color:white;text-decoration:underline;margin-left:8px;">Book now →</a>';
+        document.body.insertBefore(banner, document.body.firstChild);
+      }
+    });
+  </script>
+
   <script>
     function showTab(tab) {
       document.getElementById('tab-content-basic').style.display = tab === 'basic' ? 'block' : 'none';
       document.getElementById('tab-content-full').style.display = tab === 'full' ? 'block' : 'none';
-      const btnBasic = document.getElementById('tab-basic');
-      const btnFull = document.getElementById('tab-full');
-      if (tab === 'basic') {
-        btnBasic.style.background = 'var(--black)'; btnBasic.style.color = 'white';
-        btnFull.style.background = 'transparent'; btnFull.style.color = 'var(--grey)';
-      } else {
-        btnFull.style.background = 'var(--black)'; btnFull.style.color = 'white';
-        btnBasic.style.background = 'transparent'; btnBasic.style.color = 'var(--grey)';
-      }
+      document.getElementById('tab-basic').classList.toggle('active', tab === 'basic');
+      document.getElementById('tab-full').classList.toggle('active', tab === 'full');
     }
   </script>
+</body>
+</html>
