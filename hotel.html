@@ -5,11 +5,80 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Pet Hotel — V Pet</title>
   <link rel="stylesheet" href="style.css" />
+  <style>
+    /* ── Hotel pricing (scoped to this page) ── */
+    .hotel-cols {
+      max-width:960px; margin:0 auto;
+      display:grid; grid-template-columns:1fr 1fr; gap:32px;
+      padding:0 16px;
+    }
+    .hotel-col-head { display:flex; align-items:center; gap:12px; margin-bottom:24px; }
+    .hotel-col-icon {
+      width:40px; height:40px; border-radius:10px;
+      display:flex; align-items:center; justify-content:center; font-size:20px;
+      flex-shrink:0;
+    }
+    .hotel-col-icon.dark { background:var(--black); }
+    .hotel-col-icon.blue { background:var(--blue); }
+    .hotel-col-head h3 { font-size:20px; font-weight:700; letter-spacing:-0.3px; }
+    .hotel-col-head p { font-size:13px; color:var(--grey); }
+
+    .hotel-group-label {
+      font-size:11px; font-weight:600; letter-spacing:0.12em; text-transform:uppercase;
+      margin-bottom:12px;
+    }
+    .hotel-group-label.dog { color:var(--blue); }
+    .hotel-group-label.cat { color:#F472B6; }
+
+    .hotel-card {
+      background:var(--white); border:1px solid var(--border); border-radius:16px;
+      overflow:hidden; margin-bottom:16px;
+    }
+    .hotel-row {
+      display:flex; justify-content:space-between; align-items:center;
+      padding:16px 20px; border-bottom:1px solid var(--border); gap:12px;
+    }
+    .hotel-row:last-child { border-bottom:none; }
+    .hotel-row.alt { background:#FAFAFA; }
+    .hotel-row.vip { background:var(--black); }
+    .hotel-row .r-label { font-size:14px; font-weight:500; }
+    .hotel-row .r-sub { display:block; font-size:12px; color:var(--grey); }
+    .hotel-row .r-price { font-size:18px; font-weight:700; color:var(--blue); white-space:nowrap; }
+    .hotel-row.vip .r-label { color:#fff; font-weight:600; }
+    .hotel-row.vip .r-sub { color:rgba(255,255,255,0.4); }
+    .hotel-row.vip .r-price { color:#6EC6FF; }
+    .hotel-row .r-day { font-size:12px; font-weight:400; color:var(--grey); }
+
+    .hotel-note { font-size:12px; color:var(--grey); margin-top:12px; }
+
+    .hotel-included {
+      background:var(--light); border-radius:16px; padding:20px; margin-top:20px;
+    }
+    .hotel-included .inc-title {
+      font-size:12px; font-weight:600; letter-spacing:0.1em; text-transform:uppercase;
+      color:var(--grey); margin-bottom:12px;
+    }
+    .hotel-included .inc-item {
+      display:flex; align-items:center; gap:10px; font-size:13px; color:var(--black);
+      margin-bottom:8px;
+    }
+    .hotel-included .inc-item:last-child { margin-bottom:0; }
+    .hotel-included .inc-check { color:var(--blue); font-weight:700; flex-shrink:0; }
+
+    /* ── Mobile ── */
+    @media (max-width: 720px) {
+      .hotel-cols { grid-template-columns:1fr; gap:48px; }
+      .hotel-col-head h3 { font-size:18px; }
+      .hotel-row { padding:14px 16px; }
+      .hotel-row .r-label { font-size:13px; }
+      .hotel-row .r-price { font-size:16px; }
+    }
+  </style>
 </head>
 <body>
 
   <nav class="nav">
-    <a href="index.html" class="nav-logo">🐾 V Pet <sup>Skudai</sup></a>
+    <a href="index.html" class="nav-logo">V Pet <sup>Skudai</sup></a>
     <ul class="nav-links">
       <li><a href="index.html">Home</a></li>
       <li><a href="grooming.html">Grooming</a></li>
@@ -48,128 +117,80 @@
       <p class="sub">All stays include meals and daily care. Prices may change during festival days.</p>
     </div>
 
-    <!-- Two column layout -->
-    <div style="max-width:960px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr;gap:32px;">
+    <div class="hotel-cols">
 
       <!-- Pet Hotel -->
       <div>
-        <div style="display:flex;align-items:center;gap:12px;margin-bottom:24px;">
-          <div style="width:40px;height:40px;background:var(--black);border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:20px;">🏨</div>
+        <div class="hotel-col-head">
+          <div class="hotel-col-icon dark">🏨</div>
           <div>
-            <h3 style="font-size:20px;font-weight:700;letter-spacing:-0.3px;">Pet Hotel</h3>
-            <p style="font-size:13px;color:var(--grey);">Per night · meals included</p>
+            <h3>Pet Hotel</h3>
+            <p>Per night · meals included</p>
           </div>
         </div>
 
-        <!-- Dog -->
-        <p style="font-size:11px;font-weight:600;letter-spacing:0.12em;text-transform:uppercase;color:var(--blue);margin-bottom:12px;">🐶 Dog</p>
-        <div style="background:var(--white);border:1px solid var(--border);border-radius:16px;overflow:hidden;margin-bottom:16px;">
-          <div style="display:flex;justify-content:space-between;align-items:center;padding:16px 20px;border-bottom:1px solid var(--border);">
-            <span style="font-size:14px;font-weight:500;">Small</span>
-            <span style="font-size:18px;font-weight:700;color:var(--blue);">RM 50</span>
-          </div>
-          <div style="display:flex;justify-content:space-between;align-items:center;padding:16px 20px;border-bottom:1px solid var(--border);background:#FAFAFA;">
-            <div style="display:flex;align-items:center;gap:8px;">
-              <span style="font-size:14px;font-weight:500;">Medium</span>
-            </div>
-            <span style="font-size:18px;font-weight:700;color:var(--blue);">RM 65</span>
-          </div>
-          <div style="display:flex;justify-content:space-between;align-items:center;padding:16px 20px;background:var(--black);">
-            <div>
-              <span style="font-size:14px;font-weight:600;color:white;">VIP</span>
-              <span style="display:block;font-size:11px;color:rgba(255,255,255,0.4);">Premium suite</span>
-            </div>
-            <span style="font-size:18px;font-weight:700;color:#6EC6FF;">RM 85</span>
+        <p class="hotel-group-label dog">Dog</p>
+        <div class="hotel-card">
+          <div class="hotel-row"><span class="r-label">Small</span><span class="r-price">RM 50</span></div>
+          <div class="hotel-row alt"><span class="r-label">Medium</span><span class="r-price">RM 65</span></div>
+          <div class="hotel-row vip">
+            <div><span class="r-label">VIP</span><span class="r-sub">Premium suite</span></div>
+            <span class="r-price">RM 85</span>
           </div>
         </div>
 
-        <!-- Cat -->
-        <p style="font-size:11px;font-weight:600;letter-spacing:0.12em;text-transform:uppercase;color:#F472B6;margin-bottom:12px;">🐱 Cat</p>
-        <div style="background:var(--white);border:1px solid var(--border);border-radius:16px;overflow:hidden;">
-          <div style="display:flex;justify-content:space-between;align-items:center;padding:16px 20px;border-bottom:1px solid var(--border);">
-            <span style="font-size:14px;font-weight:500;">Small</span>
-            <span style="font-size:18px;font-weight:700;color:var(--blue);">RM 50</span>
-          </div>
-          <div style="display:flex;justify-content:space-between;align-items:center;padding:16px 20px;border-bottom:1px solid var(--border);background:#FAFAFA;">
-            <span style="font-size:14px;font-weight:500;">Medium</span>
-            <span style="font-size:18px;font-weight:700;color:var(--blue);">RM 65</span>
-          </div>
-          <div style="display:flex;justify-content:space-between;align-items:center;padding:16px 20px;background:var(--black);">
-            <div>
-              <span style="font-size:14px;font-weight:600;color:white;">VIP</span>
-              <span style="display:block;font-size:11px;color:rgba(255,255,255,0.4);">Premium suite</span>
-            </div>
-            <span style="font-size:18px;font-weight:700;color:#6EC6FF;">RM 85</span>
+        <p class="hotel-group-label cat">Cat</p>
+        <div class="hotel-card">
+          <div class="hotel-row"><span class="r-label">Small</span><span class="r-price">RM 50</span></div>
+          <div class="hotel-row alt"><span class="r-label">Medium</span><span class="r-price">RM 65</span></div>
+          <div class="hotel-row vip">
+            <div><span class="r-label">VIP</span><span class="r-sub">Premium suite</span></div>
+            <span class="r-price">RM 85</span>
           </div>
         </div>
-        <p style="font-size:12px;color:var(--grey);margin-top:12px;">* Price may change during festival days.</p>
+        <p class="hotel-note">* Price may change during festival days.</p>
       </div>
 
       <!-- Day Care -->
       <div>
-        <div style="display:flex;align-items:center;gap:12px;margin-bottom:24px;">
-          <div style="width:40px;height:40px;background:var(--blue);border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:20px;">☀️</div>
+        <div class="hotel-col-head">
+          <div class="hotel-col-icon blue">☀</div>
           <div>
-            <h3 style="font-size:20px;font-weight:700;letter-spacing:-0.3px;">Day Care</h3>
-            <p style="font-size:13px;color:var(--grey);">11am – 5pm · same day</p>
+            <h3>Day Care</h3>
+            <p>11am – 5pm · same day</p>
           </div>
         </div>
 
-        <!-- Dog Day Care -->
-        <p style="font-size:11px;font-weight:600;letter-spacing:0.12em;text-transform:uppercase;color:var(--blue);margin-bottom:12px;">🐶 Dog</p>
-        <div style="background:var(--white);border:1px solid var(--border);border-radius:16px;overflow:hidden;margin-bottom:16px;">
-          <div style="display:flex;justify-content:space-between;align-items:center;padding:16px 20px;border-bottom:1px solid var(--border);">
-            <div>
-              <span style="font-size:14px;font-weight:500;">Weekdays</span>
-              <span style="display:block;font-size:12px;color:var(--grey);">Tue – Fri</span>
-            </div>
-            <span style="font-size:18px;font-weight:700;color:var(--blue);">RM 40<span style="font-size:12px;font-weight:400;color:var(--grey);">/day</span></span>
+        <p class="hotel-group-label dog">Dog</p>
+        <div class="hotel-card">
+          <div class="hotel-row">
+            <div><span class="r-label">Weekdays</span><span class="r-sub">Tue – Fri</span></div>
+            <span class="r-price">RM 40<span class="r-day">/day</span></span>
           </div>
-          <div style="display:flex;justify-content:space-between;align-items:center;padding:16px 20px;background:#FAFAFA;">
-            <div>
-              <span style="font-size:14px;font-weight:500;">Weekend</span>
-              <span style="display:block;font-size:12px;color:var(--grey);">Sat – Sun</span>
-            </div>
-            <span style="font-size:18px;font-weight:700;color:var(--blue);">RM 50<span style="font-size:12px;font-weight:400;color:var(--grey);">/day</span></span>
+          <div class="hotel-row alt">
+            <div><span class="r-label">Weekend</span><span class="r-sub">Sat – Sun</span></div>
+            <span class="r-price">RM 50<span class="r-day">/day</span></span>
           </div>
         </div>
 
-        <!-- Cat Day Care -->
-        <p style="font-size:11px;font-weight:600;letter-spacing:0.12em;text-transform:uppercase;color:#F472B6;margin-bottom:12px;">🐱 Cat</p>
-        <div style="background:var(--white);border:1px solid var(--border);border-radius:16px;overflow:hidden;">
-          <div style="display:flex;justify-content:space-between;align-items:center;padding:16px 20px;border-bottom:1px solid var(--border);">
-            <div>
-              <span style="font-size:14px;font-weight:500;">Weekdays</span>
-              <span style="display:block;font-size:12px;color:var(--grey);">Tue – Fri</span>
-            </div>
-            <span style="font-size:18px;font-weight:700;color:var(--blue);">RM 20<span style="font-size:12px;font-weight:400;color:var(--grey);">/day</span></span>
+        <p class="hotel-group-label cat">Cat</p>
+        <div class="hotel-card">
+          <div class="hotel-row">
+            <div><span class="r-label">Weekdays</span><span class="r-sub">Tue – Fri</span></div>
+            <span class="r-price">RM 20<span class="r-day">/day</span></span>
           </div>
-          <div style="display:flex;justify-content:space-between;align-items:center;padding:16px 20px;background:#FAFAFA;">
-            <div>
-              <span style="font-size:14px;font-weight:500;">Weekend</span>
-              <span style="display:block;font-size:12px;color:var(--grey);">Sat – Sun</span>
-            </div>
-            <span style="font-size:18px;font-weight:700;color:var(--blue);">RM 25<span style="font-size:12px;font-weight:400;color:var(--grey);">/day</span></span>
+          <div class="hotel-row alt">
+            <div><span class="r-label">Weekend</span><span class="r-sub">Sat – Sun</span></div>
+            <span class="r-price">RM 25<span class="r-day">/day</span></span>
           </div>
         </div>
 
-        <!-- Included -->
-        <div style="background:var(--light);border-radius:16px;padding:20px;margin-top:20px;">
-          <p style="font-size:12px;font-weight:600;letter-spacing:0.1em;text-transform:uppercase;color:var(--grey);margin-bottom:12px;">What's included</p>
-          <div style="display:flex;flex-direction:column;gap:8px;">
-            <div style="display:flex;align-items:center;gap:10px;font-size:13px;color:var(--black);">
-              <span style="color:var(--blue);font-weight:700;">✓</span> Meals & fresh water
-            </div>
-            <div style="display:flex;align-items:center;gap:10px;font-size:13px;color:var(--black);">
-              <span style="color:var(--blue);font-weight:700;">✓</span> Daily walks & playtime
-            </div>
-            <div style="display:flex;align-items:center;gap:10px;font-size:13px;color:var(--black);">
-              <span style="color:var(--blue);font-weight:700;">✓</span> 24/7 supervision
-            </div>
-            <div style="display:flex;align-items:center;gap:10px;font-size:13px;color:var(--black);">
-              <span style="color:var(--blue);font-weight:700;">✓</span> WhatsApp updates on request
-            </div>
-          </div>
+        <div class="hotel-included">
+          <p class="inc-title">What's included</p>
+          <div class="inc-item"><span class="inc-check">✓</span> Meals & fresh water</div>
+          <div class="inc-item"><span class="inc-check">✓</span> Daily walks & playtime</div>
+          <div class="inc-item"><span class="inc-check">✓</span> 24/7 supervision</div>
+          <div class="inc-item"><span class="inc-check">✓</span> WhatsApp updates on request</div>
         </div>
       </div>
     </div>
@@ -181,10 +202,10 @@
       <h2>Everything your pet needs.</h2>
     </div>
     <div class="values-grid max-w">
-      <div class="value-item"><div class="value-icon">🛏️</div><h3>Clean Bedding Daily</h3><p>Fresh, comfortable sleeping areas changed every day.</p></div>
+      <div class="value-item"><div class="value-icon">🛏</div><h3>Clean Bedding Daily</h3><p>Fresh, comfortable sleeping areas changed every day.</p></div>
       <div class="value-item"><div class="value-icon">🍖</div><h3>Quality Meals</h3><p>Nutritious, scheduled feeding with your preferred food if supplied.</p></div>
       <div class="value-item"><div class="value-icon">🎾</div><h3>Exercise & Play</h3><p>Outdoor sessions to keep your dog active, happy and socialised.</p></div>
-      <div class="value-item"><div class="value-icon">👁️</div><h3>24/7 Supervision</h3><p>Our team is always present. Your pet is never left alone.</p></div>
+      <div class="value-item"><div class="value-icon">👁</div><h3>24/7 Supervision</h3><p>Our team is always present. Your pet is never left alone.</p></div>
     </div>
   </div>
 
@@ -249,7 +270,6 @@
     </div>
   </section>
 
-
   <footer>
     <p>© 2026 V Pet Grooming & Pet Hotel Services, Skudai</p>
     <div class="footer-links">
@@ -282,7 +302,6 @@
       hamburger.setAttribute("aria-expanded", isOpen);
       document.body.style.overflow = isOpen ? "hidden" : "";
     });
-    // Close on link click
     mobileMenu.querySelectorAll("a").forEach(link => {
       link.addEventListener("click", () => {
         mobileMenu.classList.remove("open");
@@ -295,33 +314,30 @@
 
   <script src="config.js"></script>
   <script>
-    // Apply config to page
     document.addEventListener("DOMContentLoaded", () => {
+      if (typeof VPetConfig === "undefined") {
+        console.warn("VPetConfig not found — config.js is missing from this folder. Skipping config-driven content.");
+        return;
+      }
       const c = VPetConfig;
 
-      // Update all phone numbers
       document.querySelectorAll(".cfg-phone").forEach(el => el.textContent = c.phone);
 
-      // Update all WhatsApp links
       document.querySelectorAll(".cfg-whatsapp").forEach(el => {
         el.href = "https://wa.me/" + c.whatsapp;
         if (el.textContent.includes("WhatsApp")) el.textContent = "WhatsApp " + c.phone;
       });
 
-      // Update hours
       document.querySelectorAll(".cfg-hours").forEach(el =>
         el.textContent = c.openingDays + ": " + c.openingHours
       );
 
-      // Update address
       document.querySelectorAll(".cfg-address").forEach(el => el.textContent = c.address);
 
-      // Update nav Book Now WhatsApp link
       document.querySelectorAll("a.nav-cta, a.mobile-cta").forEach(el => {
         if (el.href.includes("wa.me")) el.href = "https://wa.me/" + c.whatsapp;
       });
 
-      // Promo banner
       if (c.showBanner) {
         const banner = document.createElement("div");
         banner.style.cssText = "background:#0071E3;color:white;text-align:center;padding:10px 24px;font-size:13px;font-weight:500;position:relative;z-index:201;";
