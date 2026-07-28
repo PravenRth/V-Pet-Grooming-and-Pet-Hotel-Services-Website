@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Admin Login — V Pet</title>
+  <link rel="stylesheet" href="style.css" />
+  <style>
+    body { background: var(--black); }
+    .admin-nav {
+      display: flex; align-items: center; padding: 20px 24px;
+    }
+    .admin-nav .nav-logo { font-size: 19px; font-weight: 600; color: #fff; letter-spacing: -0.3px; }
+    .admin-nav .nav-logo sup { font-size: 10px; font-weight: 400; color: rgba(255,255,255,0.5); }
+
+    .admin-wrap {
+      min-height: calc(100vh - 76px);
+      display: flex; align-items: center; justify-content: center;
+      padding: 32px 20px 64px;
+    }
+    .admin-card {
+      width: 100%; max-width: 400px;
+      background: #fff;
+      border-radius: 20px;
+      padding: 40px 32px;
+      box-shadow: 0 24px 64px rgba(0,0,0,0.5);
+    }
+    .admin-heading { text-align: center; margin-bottom: 28px; }
+    .admin-heading .eyebrow {
+      font-size: 12px; font-weight: 600; letter-spacing: 0.15em;
+      text-transform: uppercase; color: var(--blue); margin-bottom: 10px;
+    }
+    .admin-heading h1 { font-size: 24px; font-weight: 700; letter-spacing: -0.5px; }
+    .admin-heading p { font-size: 13px; color: var(--grey); margin-top: 6px; }
+
+    .admin-form { display: flex; flex-direction: column; gap: 16px; }
+    .admin-field label {
+      display: block; font-size: 12px; font-weight: 600;
+      color: var(--grey); margin-bottom: 6px;
+    }
+    .admin-field input {
+      width: 100%; padding: 12px 14px; border-radius: 10px;
+      border: 1px solid var(--border); font-size: 15px;
+      font-family: var(--font); color: var(--black);
+      background: var(--white);
+      transition: border-color 0.15s;
+    }
+    .admin-field input:focus { outline: none; border-color: var(--blue); }
+
+    .admin-submit {
+      margin-top: 6px; width: 100%; border: none; cursor: pointer;
+      background: var(--black); color: #fff; font-size: 15px; font-weight: 600;
+      font-family: var(--font); padding: 13px; border-radius: 30px;
+      transition: background 0.2s;
+    }
+    .admin-submit:hover { background: #000; }
+    .admin-submit:disabled { opacity: 0.6; cursor: not-allowed; }
+
+    .admin-message {
+      font-size: 13px; text-align: center; margin-top: 14px;
+      display: none; padding: 10px 12px; border-radius: 10px;
+    }
+    .admin-message.show { display: block; }
+    .admin-message.error { background: #FEF2F2; color: #B91C1C; }
+    .admin-message.success { background: #F0FFF4; color: #15803D; }
+
+    .admin-foot { text-align: center; margin-top: 20px; font-size: 13px; color: var(--grey); }
+    .admin-foot a { color: var(--blue); font-weight: 500; }
+
+    @media (max-width: 480px) {
+      .admin-card { padding: 32px 22px; border-radius: 16px; }
+      .admin-heading h1 { font-size: 20px; }
+    }
+  </style>
+</head>
+<body>
+
+  <nav class="admin-nav">
+    <a href="index.html" class="nav-logo">V Pet <sup>Skudai</sup></a>
+  </nav>
+
+  <div class="admin-wrap">
+    <div class="admin-card">
+      <div class="admin-heading">
+        <p class="eyebrow">Staff Portal</p>
+        <h1>Admin Login</h1>
+        <p>Authorized staff only.</p>
+      </div>
+
+      <form id="form-admin-login" class="admin-form">
+        <div class="admin-field">
+          <label for="admin-email">Email</label>
+          <input type="email" id="admin-email" required autocomplete="email" />
+        </div>
+        <div class="admin-field">
+          <label for="admin-password">Password</label>
+          <input type="password" id="admin-password" required autocomplete="current-password" />
+        </div>
+        <button type="submit" class="admin-submit" id="admin-submit">Log In</button>
+      </form>
+
+      <p class="admin-message" id="admin-message"></p>
+
+      <p class="admin-foot">Not staff? <a href="customer.html">Customer login</a></p>
+    </div>
+  </div>
+
+  <script>
+    function showAdminMessage(text, type) {
+      const el = document.getElementById("admin-message");
+      el.textContent = text;
+      el.className = "admin-message show " + type;
+    }
+    function hideAdminMessage() {
+      document.getElementById("admin-message").className = "admin-message";
+    }
+    function friendlyAuthError(err) {
+      const code = err && err.code ? err.code : "";
+      const map = {
+        "auth/invalid-email": "Please enter a valid email address.",
+        "auth/user-not-found": "No account found with that email.",
+        "auth/wrong-password": "Incorrect password. Please try again.",
+        "auth/invalid-credential": "Incorrect email or password.",
+        "auth/too-many-requests": "Too many attempts. Please wait a moment and try again."
+      };
+      return map[code] || "Something went wrong. Please try again.";
+    }
+  </script>
+
+  <script type="module">
+    import { auth, db } from "./firebase-init.js";
+    import { signInWithEmailAndPassword, signOut } from "https://www.gstatic.com/firebasejs/10.13.0/firebase-auth.js";
+    import { doc, getDoc } from "https://www.gstatic.com/firebasejs/10.13.0/firebase-firestore.js";
+
+    document.getElementById("form-admin-login").addEventListener("submit", async (e) => {
+      e.preventDefault();
+      hideAdminMessage();
+
+      const email = document.getElementById("admin-email").value.trim();
+      const password = document.getElementById("admin-password").value;
+
+      const btn = document.getElementById("admin-submit");
+      btn.disabled = true; btn.textContent = "Logging in...";
+
+      try {
+        const cred = await signInWithEmailAndPassword(auth, email, password);
+
+        const snap = await getDoc(doc(db, "users", cred.user.uid));
+        const role = snap.exists() ? snap.data().role : null;
+
+        if (role !== "admin") {
+          await signOut(auth);
+          showAdminMessage("This account is not authorized for admin access.", "error");
+          btn.disabled = false; btn.textContent = "Log In";
+          return;
+        }
+
+        showAdminMessage("Welcome back. Redirecting...", "success");
+        // Replace with your real admin dashboard page once it exists.
+        setTimeout(() => { window.location.href = "admin-dashboard.html"; }, 1000);
+      } catch (err) {
+        showAdminMessage(friendlyAuthError(err), "error");
+        btn.disabled = false; btn.textContent = "Log In";
+      }
+    });
+  </script>
+</body>
+</html>

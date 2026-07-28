@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Customer Login — V Pet</title>
+  <link rel="stylesheet" href="style.css" />
+  <style>
+    .auth-wrap {
+      min-height: calc(100vh - 52px);
+      display: flex; align-items: center; justify-content: center;
+      background: var(--light);
+      padding: 48px 20px;
+    }
+    .auth-card {
+      width: 100%; max-width: 420px;
+      background: var(--white);
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      padding: 40px 32px;
+      box-shadow: 0 8px 40px rgba(0,0,0,0.06);
+    }
+    .auth-heading { text-align: center; margin-bottom: 28px; }
+    .auth-heading .eyebrow {
+      font-size: 12px; font-weight: 600; letter-spacing: 0.15em;
+      text-transform: uppercase; color: var(--blue); margin-bottom: 10px;
+    }
+    .auth-heading h1 {
+      font-size: 26px; font-weight: 700; letter-spacing: -0.5px;
+    }
+
+    .auth-tabs {
+      display: flex; background: var(--light); border-radius: 26px;
+      padding: 4px; margin-bottom: 28px;
+    }
+    .auth-tab-btn {
+      flex: 1; padding: 10px 0; border: none; border-radius: 22px;
+      background: transparent; color: var(--grey);
+      font-size: 14px; font-weight: 600; font-family: var(--font);
+      cursor: pointer; transition: background 0.2s, color 0.2s;
+    }
+    .auth-tab-btn.active { background: var(--black); color: #fff; }
+
+    .auth-form { display: none; flex-direction: column; gap: 16px; }
+    .auth-form.active { display: flex; }
+
+    .auth-field label {
+      display: block; font-size: 12px; font-weight: 600;
+      color: var(--grey); margin-bottom: 6px;
+    }
+    .auth-field input {
+      width: 100%; padding: 12px 14px; border-radius: 10px;
+      border: 1px solid var(--border); font-size: 15px;
+      font-family: var(--font); color: var(--black);
+      background: var(--white);
+      transition: border-color 0.15s;
+    }
+    .auth-field input:focus { outline: none; border-color: var(--blue); }
+
+    .auth-submit {
+      margin-top: 6px; width: 100%; border: none; cursor: pointer;
+      background: var(--blue); color: #fff; font-size: 15px; font-weight: 600;
+      font-family: var(--font); padding: 13px; border-radius: 30px;
+      transition: background 0.2s;
+    }
+    .auth-submit:hover { background: var(--blue-dk); }
+    .auth-submit:disabled { opacity: 0.6; cursor: not-allowed; }
+
+    .auth-message {
+      font-size: 13px; text-align: center; margin-top: 14px;
+      display: none; padding: 10px 12px; border-radius: 10px;
+    }
+    .auth-message.show { display: block; }
+    .auth-message.error { background: #FEF2F2; color: #B91C1C; }
+    .auth-message.success { background: #F0FFF4; color: #15803D; }
+
+    .auth-foot {
+      text-align: center; margin-top: 20px; font-size: 13px; color: var(--grey);
+    }
+    .auth-foot a { color: var(--blue); font-weight: 500; }
+
+    @media (max-width: 480px) {
+      .auth-card { padding: 32px 22px; border-radius: 16px; }
+      .auth-heading h1 { font-size: 22px; }
+    }
+  </style>
+</head>
+<body>
+
+  <nav class="nav">
+    <a href="index.html" class="nav-logo">V Pet <sup>Skudai</sup></a>
+    <ul class="nav-links">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="grooming.html">Grooming</a></li>
+      <li><a href="hotel.html">Pet Hotel</a></li>
+      <li><a href="products.html">Products</a></li>
+      <li><a href="adoption.html">Adoption</a></li>
+      <li><a href="about.html">About</a></li>
+      <li><a href="faq.html">FAQ</a></li>
+    </ul>
+    <a href="grooming.html" class="nav-cta">Book Now</a>
+    <button class="hamburger" id="hamburger" aria-label="Toggle menu" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
+  </nav>
+
+  <div class="auth-wrap">
+    <div class="auth-card">
+      <div class="auth-heading">
+        <p class="eyebrow">Customer Account</p>
+        <h1>Welcome to V Pet</h1>
+      </div>
+
+      <div class="auth-tabs">
+        <button class="auth-tab-btn active" id="tab-login" onclick="showAuthTab('login')">Log In</button>
+        <button class="auth-tab-btn" id="tab-register" onclick="showAuthTab('register')">Register</button>
+      </div>
+
+      <!-- Login form -->
+      <form id="form-login" class="auth-form active">
+        <div class="auth-field">
+          <label for="login-email">Email</label>
+          <input type="email" id="login-email" required autocomplete="email" />
+        </div>
+        <div class="auth-field">
+          <label for="login-password">Password</label>
+          <input type="password" id="login-password" required autocomplete="current-password" />
+        </div>
+        <button type="submit" class="auth-submit" id="login-submit">Log In</button>
+      </form>
+
+      <!-- Register form -->
+      <form id="form-register" class="auth-form">
+        <div class="auth-field">
+          <label for="reg-name">Full Name</label>
+          <input type="text" id="reg-name" required autocomplete="name" />
+        </div>
+        <div class="auth-field">
+          <label for="reg-email">Email</label>
+          <input type="email" id="reg-email" required autocomplete="email" />
+        </div>
+        <div class="auth-field">
+          <label for="reg-phone">Phone Number</label>
+          <input type="tel" id="reg-phone" placeholder="011-XXXXXXX" required autocomplete="tel" />
+        </div>
+        <div class="auth-field">
+          <label for="reg-password">Password</label>
+          <input type="password" id="reg-password" required minlength="6" autocomplete="new-password" />
+        </div>
+        <div class="auth-field">
+          <label for="reg-password-confirm">Confirm Password</label>
+          <input type="password" id="reg-password-confirm" required minlength="6" autocomplete="new-password" />
+        </div>
+        <button type="submit" class="auth-submit" id="register-submit">Create Account</button>
+      </form>
+
+      <p class="auth-message" id="auth-message"></p>
+
+      <p class="auth-foot">Staff member? <a href="admin.html">Admin login</a></p>
+    </div>
+  </div>
+
+  <footer>
+    <p>© 2026 V Pet Grooming & Pet Hotel Services, Skudai</p>
+    <div class="footer-links">
+      <a href="grooming.html">Grooming</a>
+      <a href="hotel.html">Hotel</a>
+      <a href="adoption.html">Adoption</a>
+      <a href="about.html">About</a>
+      <a href="faq.html">FAQ</a>
+    </div>
+  </footer>
+
+  <!-- Mobile Menu -->
+  <div class="mobile-menu" id="mobileMenu">
+    <a href="index.html">Home</a>
+    <a href="grooming.html">Grooming</a>
+    <a href="hotel.html">Pet Hotel</a>
+    <a href="products.html">Products</a>
+    <a href="adoption.html">Adoption</a>
+    <a href="about.html">About</a>
+    <a href="faq.html">FAQ</a>
+    <a href="https://wa.me/601136020431" target="_blank" class="mobile-cta">Book Now</a>
+  </div>
+
+  <script>
+    const hamburger = document.getElementById("hamburger");
+    const mobileMenu = document.getElementById("mobileMenu");
+    hamburger.addEventListener("click", () => {
+      const isOpen = mobileMenu.classList.toggle("open");
+      hamburger.classList.toggle("open");
+      hamburger.setAttribute("aria-expanded", isOpen);
+      document.body.style.overflow = isOpen ? "hidden" : "";
+    });
+    mobileMenu.querySelectorAll("a").forEach(link => {
+      link.addEventListener("click", () => {
+        mobileMenu.classList.remove("open");
+        hamburger.classList.remove("open");
+        hamburger.setAttribute("aria-expanded", false);
+        document.body.style.overflow = "";
+      });
+    });
+
+    function showAuthTab(tab) {
+      document.getElementById("form-login").classList.toggle("active", tab === "login");
+      document.getElementById("form-register").classList.toggle("active", tab === "register");
+      document.getElementById("tab-login").classList.toggle("active", tab === "login");
+      document.getElementById("tab-register").classList.toggle("active", tab === "register");
+      hideAuthMessage();
+    }
+
+    function showAuthMessage(text, type) {
+      const el = document.getElementById("auth-message");
+      el.textContent = text;
+      el.className = "auth-message show " + type;
+    }
+    function hideAuthMessage() {
+      const el = document.getElementById("auth-message");
+      el.className = "auth-message";
+    }
+
+    function friendlyAuthError(err) {
+      const code = err && err.code ? err.code : "";
+      const map = {
+        "auth/email-already-in-use": "That email is already registered. Try logging in instead.",
+        "auth/invalid-email": "Please enter a valid email address.",
+        "auth/weak-password": "Password should be at least 6 characters.",
+        "auth/user-not-found": "No account found with that email.",
+        "auth/wrong-password": "Incorrect password. Please try again.",
+        "auth/invalid-credential": "Incorrect email or password.",
+        "auth/too-many-requests": "Too many attempts. Please wait a moment and try again."
+      };
+      return map[code] || "Something went wrong. Please try again.";
+    }
+  </script>
+
+  <script type="module">
+    import { auth, db } from "./firebase-init.js";
+    import {
+      createUserWithEmailAndPassword,
+      signInWithEmailAndPassword,
+      signOut
+    } from "https://www.gstatic.com/firebasejs/10.13.0/firebase-auth.js";
+    import {
+      doc, setDoc, getDoc, serverTimestamp
+    } from "https://www.gstatic.com/firebasejs/10.13.0/firebase-firestore.js";
+
+    // ── Register ──
+    document.getElementById("form-register").addEventListener("submit", async (e) => {
+      e.preventDefault();
+      hideAuthMessage();
+
+      const name = document.getElementById("reg-name").value.trim();
+      const email = document.getElementById("reg-email").value.trim();
+      const phone = document.getElementById("reg-phone").value.trim();
+      const password = document.getElementById("reg-password").value;
+      const confirm = document.getElementById("reg-password-confirm").value;
+
+      if (password !== confirm) {
+        showAuthMessage("Passwords do not match.", "error");
+        return;
+      }
+
+      const btn = document.getElementById("register-submit");
+      btn.disabled = true; btn.textContent = "Creating account...";
+
+      try {
+        const cred = await createUserWithEmailAndPassword(auth, email, password);
+
+        // Store profile + role in Firestore.
+        // NOTE: Firestore security rules must enforce that role can only
+        // ever be "customer" when written from the client — see rules below.
+        await setDoc(doc(db, "users", cred.user.uid), {
+          name,
+          email,
+          phone,
+          role: "customer",
+          createdAt: serverTimestamp()
+        });
+
+        showAuthMessage("Account created! Redirecting...", "success");
+        setTimeout(() => { window.location.href = "index.html"; }, 1200);
+      } catch (err) {
+        showAuthMessage(friendlyAuthError(err), "error");
+        btn.disabled = false; btn.textContent = "Create Account";
+      }
+    });
+
+    // ── Login ──
+    document.getElementById("form-login").addEventListener("submit", async (e) => {
+      e.preventDefault();
+      hideAuthMessage();
+
+      const email = document.getElementById("login-email").value.trim();
+      const password = document.getElementById("login-password").value;
+
+      const btn = document.getElementById("login-submit");
+      btn.disabled = true; btn.textContent = "Logging in...";
+
+      try {
+        const cred = await signInWithEmailAndPassword(auth, email, password);
+
+        const snap = await getDoc(doc(db, "users", cred.user.uid));
+        const role = snap.exists() ? snap.data().role : "customer";
+
+        if (role === "admin") {
+          // Admins should use the admin portal, not the customer login.
+          await signOut(auth);
+          showAuthMessage("This is a staff account. Please use the admin login.", "error");
+          btn.disabled = false; btn.textContent = "Log In";
+          return;
+        }
+
+        showAuthMessage("Welcome back! Redirecting...", "success");
+        setTimeout(() => { window.location.href = "index.html"; }, 1000);
+      } catch (err) {
+        showAuthMessage(friendlyAuthError(err), "error");
+        btn.disabled = false; btn.textContent = "Log In";
+      }
+    });
+  </script>
+</body>
+</html>
