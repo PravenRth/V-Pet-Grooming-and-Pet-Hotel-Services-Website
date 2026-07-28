@@ -7,9 +7,7 @@
   <link rel="stylesheet" href="style.css" />
   <style>
     body { background: var(--black); }
-    .admin-nav {
-      display: flex; align-items: center; padding: 20px 24px;
-    }
+    .admin-nav { display: flex; align-items: center; padding: 20px 24px; }
     .admin-nav .nav-logo { font-size: 19px; font-weight: 600; color: #fff; letter-spacing: -0.3px; }
     .admin-nav .nav-logo sup { font-size: 10px; font-weight: 400; color: rgba(255,255,255,0.5); }
 
@@ -31,12 +29,21 @@
       text-transform: uppercase; color: var(--blue); margin-bottom: 10px;
     }
     .admin-heading h1 { font-size: 24px; font-weight: 700; letter-spacing: -0.5px; }
-    .admin-heading p { font-size: 13px; color: var(--grey); margin-top: 6px; }
+    .admin-heading p.sub { font-size: 13px; color: var(--grey); margin-top: 6px; }
 
-    .admin-form { display: flex; flex-direction: column; gap: 16px; }
+    .admin-step { display: none; flex-direction: column; gap: 16px; }
+    .admin-step.active { display: flex; }
+
     .admin-field label {
       display: block; font-size: 12px; font-weight: 600;
       color: var(--grey); margin-bottom: 6px;
+    }
+    .phone-input-row { display: flex; gap: 8px; }
+    .phone-prefix {
+      display: flex; align-items: center; justify-content: center;
+      padding: 0 14px; border-radius: 10px; border: 1px solid var(--border);
+      font-size: 15px; font-weight: 600; color: var(--black); background: var(--light);
+      flex-shrink: 0;
     }
     .admin-field input {
       width: 100%; padding: 12px 14px; border-radius: 10px;
@@ -46,6 +53,7 @@
       transition: border-color 0.15s;
     }
     .admin-field input:focus { outline: none; border-color: var(--blue); }
+    .otp-input { letter-spacing: 6px; font-weight: 600; text-align: center; }
 
     .admin-submit {
       margin-top: 6px; width: 100%; border: none; cursor: pointer;
@@ -55,6 +63,12 @@
     }
     .admin-submit:hover { background: #000; }
     .admin-submit:disabled { opacity: 0.6; cursor: not-allowed; }
+
+    .admin-link-btn {
+      background: none; border: none; cursor: pointer;
+      color: var(--blue); font-size: 13px; font-weight: 500;
+      font-family: var(--font); text-align: center;
+    }
 
     .admin-message {
       font-size: 13px; text-align: center; margin-top: 14px;
@@ -84,28 +98,45 @@
       <div class="admin-heading">
         <p class="eyebrow">Staff Portal</p>
         <h1>Admin Login</h1>
-        <p>Authorized staff only.</p>
+        <p class="sub">Authorized staff only. Log in with your registered phone number.</p>
       </div>
 
-      <form id="form-admin-login" class="admin-form">
+      <!-- Step 1: phone -->
+      <form id="step-phone" class="admin-step active">
         <div class="admin-field">
-          <label for="admin-email">Email</label>
-          <input type="email" id="admin-email" required autocomplete="email" />
+          <label for="phone-input">Phone Number</label>
+          <div class="phone-input-row">
+            <span class="phone-prefix">+60</span>
+            <input type="tel" id="phone-input" placeholder="11-3602 0431" required autocomplete="tel" />
+          </div>
         </div>
+        <button type="submit" class="admin-submit" id="send-otp-btn">Send Code</button>
+      </form>
+
+      <!-- Step 2: OTP -->
+      <form id="step-otp" class="admin-step">
         <div class="admin-field">
-          <label for="admin-password">Password</label>
-          <input type="password" id="admin-password" required autocomplete="current-password" />
+          <label for="otp-input">Verification Code</label>
+          <input type="text" id="otp-input" class="otp-input" inputmode="numeric" maxlength="6" placeholder="------" required />
         </div>
-        <button type="submit" class="admin-submit" id="admin-submit">Log In</button>
+        <button type="submit" class="admin-submit" id="verify-otp-btn">Verify & Log In</button>
+        <button type="button" class="admin-link-btn" id="change-number-btn">Use a different number</button>
       </form>
 
       <p class="admin-message" id="admin-message"></p>
+
+      <div id="recaptcha-container"></div>
 
       <p class="admin-foot">Not staff? <a href="customer.html">Customer login</a></p>
     </div>
   </div>
 
   <script>
+    function showStep(step) {
+      document.querySelectorAll(".admin-step").forEach(f => f.classList.remove("active"));
+      document.getElementById("step-" + step).classList.add("active");
+      hideAdminMessage();
+    }
     function showAdminMessage(text, type) {
       const el = document.getElementById("admin-message");
       el.textContent = text;
@@ -114,13 +145,19 @@
     function hideAdminMessage() {
       document.getElementById("admin-message").className = "admin-message";
     }
+    function toE164(localInput) {
+      let digits = localInput.replace(/\D/g, "");
+      if (digits.startsWith("0")) digits = digits.slice(1);
+      return "+60" + digits;
+    }
     function friendlyAuthError(err) {
       const code = err && err.code ? err.code : "";
       const map = {
-        "auth/invalid-email": "Please enter a valid email address.",
-        "auth/user-not-found": "No account found with that email.",
-        "auth/wrong-password": "Incorrect password. Please try again.",
-        "auth/invalid-credential": "Incorrect email or password.",
+        "auth/invalid-phone-number": "That phone number doesn't look right. Please check and try again.",
+        "auth/missing-phone-number": "Please enter a phone number.",
+        "auth/quota-exceeded": "Too many attempts right now. Please try again later.",
+        "auth/code-expired": "That code has expired. Please request a new one.",
+        "auth/invalid-verification-code": "Incorrect code. Please check and try again.",
         "auth/too-many-requests": "Too many attempts. Please wait a moment and try again."
       };
       return map[code] || "Something went wrong. Please try again.";
@@ -129,40 +166,68 @@
 
   <script type="module">
     import { auth, db } from "./firebase-init.js";
-    import { signInWithEmailAndPassword, signOut } from "https://www.gstatic.com/firebasejs/10.13.0/firebase-auth.js";
+    import {
+      RecaptchaVerifier,
+      signInWithPhoneNumber,
+      signOut
+    } from "https://www.gstatic.com/firebasejs/10.13.0/firebase-auth.js";
     import { doc, getDoc } from "https://www.gstatic.com/firebasejs/10.13.0/firebase-firestore.js";
 
-    document.getElementById("form-admin-login").addEventListener("submit", async (e) => {
+    let confirmationResult = null;
+    let recaptchaVerifier = null;
+
+    document.getElementById("step-phone").addEventListener("submit", async (e) => {
       e.preventDefault();
       hideAdminMessage();
 
-      const email = document.getElementById("admin-email").value.trim();
-      const password = document.getElementById("admin-password").value;
-
-      const btn = document.getElementById("admin-submit");
-      btn.disabled = true; btn.textContent = "Logging in...";
+      const phone = toE164(document.getElementById("phone-input").value.trim());
+      const btn = document.getElementById("send-otp-btn");
+      btn.disabled = true; btn.textContent = "Sending...";
 
       try {
-        const cred = await signInWithEmailAndPassword(auth, email, password);
+        if (!recaptchaVerifier) {
+          recaptchaVerifier = new RecaptchaVerifier(auth, "recaptcha-container", { size: "invisible" });
+        }
+        confirmationResult = await signInWithPhoneNumber(auth, phone, recaptchaVerifier);
+        showStep("otp");
+      } catch (err) {
+        showAdminMessage(friendlyAuthError(err), "error");
+      } finally {
+        btn.disabled = false; btn.textContent = "Send Code";
+      }
+    });
 
-        const snap = await getDoc(doc(db, "users", cred.user.uid));
+    document.getElementById("step-otp").addEventListener("submit", async (e) => {
+      e.preventDefault();
+      hideAdminMessage();
+
+      const code = document.getElementById("otp-input").value.trim();
+      const btn = document.getElementById("verify-otp-btn");
+      btn.disabled = true; btn.textContent = "Verifying...";
+
+      try {
+        const result = await confirmationResult.confirm(code);
+        const user = result.user;
+
+        const snap = await getDoc(doc(db, "users", user.uid));
         const role = snap.exists() ? snap.data().role : null;
 
         if (role !== "admin") {
           await signOut(auth);
           showAdminMessage("This account is not authorized for admin access.", "error");
-          btn.disabled = false; btn.textContent = "Log In";
+          btn.disabled = false; btn.textContent = "Verify & Log In";
           return;
         }
 
         showAdminMessage("Welcome back. Redirecting...", "success");
-        // Replace with your real admin dashboard page once it exists.
         setTimeout(() => { window.location.href = "admin-dashboard.html"; }, 1000);
       } catch (err) {
         showAdminMessage(friendlyAuthError(err), "error");
-        btn.disabled = false; btn.textContent = "Log In";
+        btn.disabled = false; btn.textContent = "Verify & Log In";
       }
     });
+
+    document.getElementById("change-number-btn").addEventListener("click", () => showStep("phone"));
   </script>
 </body>
 </html>
