@@ -42,7 +42,7 @@
       padding: 40px 32px;
       box-shadow: 0 24px 64px rgba(0,0,0,0.35);
     }
-    .auth-heading { text-align: center; margin-bottom: 28px; }
+    .auth-heading { text-align: center; margin-bottom: 24px; }
     .auth-heading .eyebrow {
       font-size: 12px; font-weight: 600; letter-spacing: 0.15em;
       text-transform: uppercase; color: var(--blue); margin-bottom: 10px;
@@ -50,19 +50,23 @@
     .auth-heading h1 { font-size: 26px; font-weight: 700; letter-spacing: -0.5px; }
     .auth-heading p.sub { font-size: 13px; color: var(--grey); margin-top: 8px; }
 
+    .auth-tabs {
+      display: flex; background: var(--light); border-radius: 12px;
+      padding: 4px; margin-bottom: 24px;
+    }
+    .auth-tab {
+      flex: 1; text-align: center; padding: 9px 0; border: none; cursor: pointer;
+      background: transparent; font-family: var(--font); font-size: 13px; font-weight: 600;
+      color: var(--grey); border-radius: 9px; transition: all 0.15s;
+    }
+    .auth-tab.active { background: #fff; color: var(--black); box-shadow: 0 1px 4px rgba(0,0,0,0.12); }
+
     .auth-step { display: none; flex-direction: column; gap: 16px; }
     .auth-step.active { display: flex; }
 
     .auth-field label {
       display: block; font-size: 12px; font-weight: 600;
       color: var(--grey); margin-bottom: 6px;
-    }
-    .phone-input-row { display: flex; gap: 8px; }
-    .phone-prefix {
-      display: flex; align-items: center; justify-content: center;
-      padding: 0 14px; border-radius: 10px; border: 1px solid var(--border);
-      font-size: 15px; font-weight: 600; color: var(--black); background: var(--light);
-      flex-shrink: 0;
     }
     .auth-field input {
       width: 100%; padding: 12px 14px; border-radius: 10px;
@@ -72,7 +76,14 @@
       transition: border-color 0.15s;
     }
     .auth-field input:focus { outline: none; border-color: var(--blue); }
-    .otp-input { letter-spacing: 6px; font-weight: 600; text-align: center; }
+
+    .auth-field-row { display: flex; justify-content: space-between; align-items: center; margin-bottom: 6px; }
+    .auth-field-row label { margin-bottom: 0; }
+    .auth-forgot-link {
+      background: none; border: none; cursor: pointer;
+      color: var(--blue); font-size: 12px; font-weight: 500;
+      font-family: var(--font);
+    }
 
     .auth-submit {
       margin-top: 6px; width: 100%; border: none; cursor: pointer;
@@ -130,45 +141,60 @@
       <div class="auth-heading">
         <p class="eyebrow">Customer Account</p>
         <h1 id="auth-title">Welcome to V Pet</h1>
-        <p class="sub" id="auth-sub">Log in or sign up with your phone number.</p>
+        <p class="sub" id="auth-sub">Log in or sign up with your email.</p>
       </div>
 
-      <!-- Step 1: phone number -->
-      <form id="step-phone" class="auth-step active">
+      <div class="auth-tabs" id="auth-tabs">
+        <button type="button" class="auth-tab active" id="tab-login">Log In</button>
+        <button type="button" class="auth-tab" id="tab-signup">Sign Up</button>
+      </div>
+
+      <!-- Step: login -->
+      <form id="step-login" class="auth-step active">
         <div class="auth-field">
-          <label for="phone-input">Phone Number</label>
-          <div class="phone-input-row">
-            <span class="phone-prefix">+60</span>
-            <input type="tel" id="phone-input" placeholder="11-3602 0431" required autocomplete="tel" />
+          <label for="login-email-input">Email</label>
+          <input type="email" id="login-email-input" placeholder="you@example.com" required autocomplete="username" />
+        </div>
+        <div class="auth-field">
+          <div class="auth-field-row">
+            <label for="login-password-input">Password</label>
+            <button type="button" class="auth-forgot-link" id="forgot-password-btn">Forgot password?</button>
           </div>
+          <input type="password" id="login-password-input" placeholder="••••••••" required autocomplete="current-password" />
         </div>
-        <button type="submit" class="auth-submit" id="send-otp-btn">Send Code</button>
+        <button type="submit" class="auth-submit" id="login-btn">Log In</button>
       </form>
 
-      <!-- Step 2: OTP -->
-      <form id="step-otp" class="auth-step">
-        <div class="auth-field">
-          <label for="otp-input">Verification Code</label>
-          <input type="text" id="otp-input" class="otp-input" inputmode="numeric" maxlength="6" placeholder="------" required />
-        </div>
-        <button type="submit" class="auth-submit" id="verify-otp-btn">Verify & Continue</button>
-        <button type="button" class="auth-link-btn" id="change-number-btn">Use a different number</button>
-      </form>
-
-      <!-- Step 3: name (first-time customers only) -->
-      <form id="step-profile" class="auth-step">
+      <!-- Step: sign up -->
+      <form id="step-signup" class="auth-step">
         <div class="auth-field">
           <label for="name-input">Your Name</label>
           <input type="text" id="name-input" placeholder="Full name" required autocomplete="name" />
         </div>
-        <button type="submit" class="auth-submit" id="save-profile-btn">Finish</button>
+        <div class="auth-field">
+          <label for="signup-email-input">Email</label>
+          <input type="email" id="signup-email-input" placeholder="you@example.com" required autocomplete="username" />
+        </div>
+        <div class="auth-field">
+          <label for="signup-password-input">Password</label>
+          <input type="password" id="signup-password-input" placeholder="At least 6 characters" required minlength="6" autocomplete="new-password" />
+        </div>
+        <button type="submit" class="auth-submit" id="signup-btn">Create Account</button>
+      </form>
+
+      <!-- Step: forgot password -->
+      <form id="step-reset" class="auth-step">
+        <div class="auth-field">
+          <label for="reset-email-input">Email</label>
+          <input type="email" id="reset-email-input" placeholder="you@example.com" required autocomplete="username" />
+        </div>
+        <button type="submit" class="auth-submit" id="reset-btn">Send Reset Link</button>
+        <button type="button" class="auth-link-btn" id="back-to-login-btn">Back to login</button>
       </form>
 
       <p class="auth-message" id="auth-message"></p>
 
-      <div id="recaptcha-container"></div>
-
-      <p class="auth-foot">Staff member? <a href="admin.html">Admin login</a></p>
+      <p class="auth-foot" id="auth-foot">Staff member? <a href="admin.html">Admin login</a></p>
     </div>
   </div>
 
@@ -218,6 +244,10 @@
       document.getElementById("step-" + step).classList.add("active");
       hideAuthMessage();
     }
+    function setTab(tab) {
+      document.getElementById("tab-login").classList.toggle("active", tab === "login");
+      document.getElementById("tab-signup").classList.toggle("active", tab === "signup");
+    }
     function showAuthMessage(text, type) {
       const el = document.getElementById("auth-message");
       el.textContent = text;
@@ -226,126 +256,144 @@
     function hideAuthMessage() {
       document.getElementById("auth-message").className = "auth-message";
     }
-    function toE164(localInput) {
-      let digits = localInput.replace(/\D/g, "");
-      if (digits.startsWith("0")) digits = digits.slice(1);
-      return "+60" + digits;
-    }
     function friendlyAuthError(err) {
       const code = err && err.code ? err.code : "";
       const map = {
-        "auth/invalid-phone-number": "That phone number doesn't look right. Please check and try again.",
-        "auth/missing-phone-number": "Please enter your phone number.",
-        "auth/quota-exceeded": "Too many attempts right now. Please try again later.",
-        "auth/code-expired": "That code has expired. Please request a new one.",
-        "auth/invalid-verification-code": "Incorrect code. Please check and try again.",
-        "auth/too-many-requests": "Too many attempts. Please wait a moment and try again."
+        "auth/invalid-email": "That email address doesn't look right. Please check and try again.",
+        "auth/missing-email": "Please enter your email address.",
+        "auth/missing-password": "Please enter a password.",
+        "auth/user-not-found": "No account found with that email.",
+        "auth/wrong-password": "Incorrect email or password.",
+        "auth/invalid-credential": "Incorrect email or password.",
+        "auth/email-already-in-use": "An account with this email already exists. Try logging in instead.",
+        "auth/weak-password": "Please choose a password with at least 6 characters.",
+        "auth/too-many-requests": "Too many attempts. Please wait a moment and try again.",
+        "auth/user-disabled": "This account has been disabled."
       };
       return map[code] || "Something went wrong. Please try again.";
     }
+
+    document.getElementById("tab-login").addEventListener("click", () => {
+      setTab("login");
+      document.getElementById("auth-title").textContent = "Welcome back";
+      document.getElementById("auth-sub").textContent = "Log in with your email.";
+      showStep("login");
+    });
+    document.getElementById("tab-signup").addEventListener("click", () => {
+      setTab("signup");
+      document.getElementById("auth-title").textContent = "Create your account";
+      document.getElementById("auth-sub").textContent = "Sign up with your email to get started.";
+      showStep("signup");
+    });
   </script>
 
   <script type="module">
     import { auth, db } from "./firebase-init.js";
     import {
-      RecaptchaVerifier,
-      signInWithPhoneNumber,
+      signInWithEmailAndPassword,
+      createUserWithEmailAndPassword,
+      sendPasswordResetEmail,
       signOut
     } from "https://www.gstatic.com/firebasejs/10.13.0/firebase-auth.js";
     import {
       doc, getDoc, setDoc, serverTimestamp
     } from "https://www.gstatic.com/firebasejs/10.13.0/firebase-firestore.js";
 
-    let confirmationResult = null;
-    let recaptchaVerifier = null;
-    let currentUser = null;
-
-    document.getElementById("step-phone").addEventListener("submit", async (e) => {
+    document.getElementById("step-login").addEventListener("submit", async (e) => {
       e.preventDefault();
       hideAuthMessage();
 
-      const phone = toE164(document.getElementById("phone-input").value.trim());
-      const btn = document.getElementById("send-otp-btn");
-      btn.disabled = true; btn.textContent = "Sending...";
+      const email = document.getElementById("login-email-input").value.trim();
+      const password = document.getElementById("login-password-input").value;
+      const btn = document.getElementById("login-btn");
+      btn.disabled = true; btn.textContent = "Logging in...";
 
       try {
-        if (!recaptchaVerifier) {
-          recaptchaVerifier = new RecaptchaVerifier(auth, "recaptcha-container", { size: "invisible" });
+        const cred = await signInWithEmailAndPassword(auth, email, password);
+        const user = cred.user;
+
+        const snap = await getDoc(doc(db, "users", user.uid));
+        const role = snap.exists() ? snap.data().role : null;
+
+        if (role === "admin") {
+          await signOut(auth);
+          showAuthMessage("This is a staff account. Please use the admin login.", "error");
+          btn.disabled = false; btn.textContent = "Log In";
+          return;
         }
-        confirmationResult = await signInWithPhoneNumber(auth, phone, recaptchaVerifier);
-        showStep("otp");
-      } catch (err) {
-        console.error(err);
-        showAuthMessage(friendlyAuthError(err), "error");
-      } finally {
-        btn.disabled = false; btn.textContent = "Send Code";
-      }
-    });
 
-    document.getElementById("step-otp").addEventListener("submit", async (e) => {
-      e.preventDefault();
-      hideAuthMessage();
-
-      const code = document.getElementById("otp-input").value.trim();
-      const btn = document.getElementById("verify-otp-btn");
-      btn.disabled = true; btn.textContent = "Verifying...";
-
-      try {
-        const result = await confirmationResult.confirm(code);
-        currentUser = result.user;
-
-        const snap = await getDoc(doc(db, "users", currentUser.uid));
-
-        if (snap.exists()) {
-          const role = snap.data().role;
-          if (role === "admin") {
-            await signOut(auth);
-            showAuthMessage("This is a staff account. Please use the admin login.", "error");
-            btn.disabled = false; btn.textContent = "Verify & Continue";
-            return;
-          }
-          showAuthMessage("Welcome back! Redirecting...", "success");
-          setTimeout(() => { window.location.href = "index.html"; }, 1000);
-        } else {
-          document.getElementById("auth-title").textContent = "Almost done";
-          document.getElementById("auth-sub").textContent = "Tell us your name to finish setting up your account.";
-          showStep("profile");
-        }
-      } catch (err) {
-        console.error(err);
-        showAuthMessage(friendlyAuthError(err), "error");
-        btn.disabled = false; btn.textContent = "Verify & Continue";
-      }
-    });
-
-    document.getElementById("step-profile").addEventListener("submit", async (e) => {
-      e.preventDefault();
-      hideAuthMessage();
-
-      const name = document.getElementById("name-input").value.trim();
-      const btn = document.getElementById("save-profile-btn");
-      btn.disabled = true; btn.textContent = "Saving...";
-
-      try {
-        await setDoc(doc(db, "users", currentUser.uid), {
-          name,
-          phone: currentUser.phoneNumber,
-          role: "customer",
-          createdAt: serverTimestamp()
-        });
-        showAuthMessage("Account set up! Redirecting...", "success");
+        showAuthMessage("Welcome back! Redirecting...", "success");
         setTimeout(() => { window.location.href = "index.html"; }, 1000);
       } catch (err) {
         console.error(err);
         showAuthMessage(friendlyAuthError(err), "error");
-        btn.disabled = false; btn.textContent = "Finish";
+        btn.disabled = false; btn.textContent = "Log In";
       }
     });
 
-    document.getElementById("change-number-btn").addEventListener("click", () => {
-      document.getElementById("auth-title").textContent = "Welcome to V Pet";
-      document.getElementById("auth-sub").textContent = "Log in or sign up with your phone number.";
-      showStep("phone");
+    document.getElementById("step-signup").addEventListener("submit", async (e) => {
+      e.preventDefault();
+      hideAuthMessage();
+
+      const name = document.getElementById("name-input").value.trim();
+      const email = document.getElementById("signup-email-input").value.trim();
+      const password = document.getElementById("signup-password-input").value;
+      const btn = document.getElementById("signup-btn");
+      btn.disabled = true; btn.textContent = "Creating account...";
+
+      try {
+        const cred = await createUserWithEmailAndPassword(auth, email, password);
+        const user = cred.user;
+
+        await setDoc(doc(db, "users", user.uid), {
+          name,
+          email: user.email,
+          role: "customer",
+          createdAt: serverTimestamp()
+        });
+
+        showAuthMessage("Account created! Redirecting...", "success");
+        setTimeout(() => { window.location.href = "index.html"; }, 1000);
+      } catch (err) {
+        console.error(err);
+        showAuthMessage(friendlyAuthError(err), "error");
+        btn.disabled = false; btn.textContent = "Create Account";
+      }
+    });
+
+    document.getElementById("forgot-password-btn").addEventListener("click", () => {
+      document.getElementById("auth-tabs").style.display = "none";
+      document.getElementById("auth-title").textContent = "Reset Password";
+      document.getElementById("auth-sub").textContent = "Enter your email and we'll send you a reset link.";
+      document.getElementById("reset-email-input").value = document.getElementById("login-email-input").value;
+      showStep("reset");
+    });
+
+    document.getElementById("back-to-login-btn").addEventListener("click", () => {
+      document.getElementById("auth-tabs").style.display = "flex";
+      setTab("login");
+      document.getElementById("auth-title").textContent = "Welcome back";
+      document.getElementById("auth-sub").textContent = "Log in with your email.";
+      showStep("login");
+    });
+
+    document.getElementById("step-reset").addEventListener("submit", async (e) => {
+      e.preventDefault();
+      hideAuthMessage();
+
+      const email = document.getElementById("reset-email-input").value.trim();
+      const btn = document.getElementById("reset-btn");
+      btn.disabled = true; btn.textContent = "Sending...";
+
+      try {
+        await sendPasswordResetEmail(auth, email);
+        showAuthMessage("Reset link sent. Please check your inbox.", "success");
+      } catch (err) {
+        console.error(err);
+        showAuthMessage(friendlyAuthError(err), "error");
+      } finally {
+        btn.disabled = false; btn.textContent = "Send Reset Link";
+      }
     });
   </script>
 </body>
