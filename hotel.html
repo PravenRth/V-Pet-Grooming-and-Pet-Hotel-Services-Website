@@ -6,38 +6,18 @@
   <title>Pet Hotel — V Pet</title>
   <link rel="stylesheet" href="style.css" />
   <style>
-    /* ── Hotel pricing (scoped to this page) ── */
-    .hotel-cols {
-      max-width:960px; margin:0 auto;
-      display:grid; grid-template-columns:1fr 1fr; gap:32px;
-      padding:0 16px;
-    }
+    .hotel-cols { max-width:960px; margin:0 auto; display:grid; grid-template-columns:1fr 1fr; gap:32px; padding:0 16px; }
     .hotel-col-head { display:flex; align-items:center; gap:12px; margin-bottom:24px; }
-    .hotel-col-icon {
-      width:40px; height:40px; border-radius:10px;
-      display:flex; align-items:center; justify-content:center; font-size:20px;
-      flex-shrink:0;
-    }
+    .hotel-col-icon { width:40px; height:40px; border-radius:10px; display:flex; align-items:center; justify-content:center; font-size:20px; flex-shrink:0; }
     .hotel-col-icon.dark { background:var(--black); }
     .hotel-col-icon.blue { background:var(--blue); }
     .hotel-col-head h3 { font-size:20px; font-weight:700; letter-spacing:-0.3px; }
     .hotel-col-head p { font-size:13px; color:var(--grey); }
-
-    .hotel-group-label {
-      font-size:11px; font-weight:600; letter-spacing:0.12em; text-transform:uppercase;
-      margin-bottom:12px;
-    }
+    .hotel-group-label { font-size:11px; font-weight:600; letter-spacing:0.12em; text-transform:uppercase; margin-bottom:12px; }
     .hotel-group-label.dog { color:var(--blue); }
     .hotel-group-label.cat { color:#F472B6; }
-
-    .hotel-card {
-      background:var(--white); border:1px solid var(--border); border-radius:16px;
-      overflow:hidden; margin-bottom:16px;
-    }
-    .hotel-row {
-      display:flex; justify-content:space-between; align-items:center;
-      padding:16px 20px; border-bottom:1px solid var(--border); gap:12px;
-    }
+    .hotel-card { background:var(--white); border:1px solid var(--border); border-radius:16px; overflow:hidden; margin-bottom:16px; }
+    .hotel-row { display:flex; justify-content:space-between; align-items:center; padding:16px 20px; border-bottom:1px solid var(--border); gap:12px; }
     .hotel-row:last-child { border-bottom:none; }
     .hotel-row.alt { background:#FAFAFA; }
     .hotel-row.vip { background:var(--black); }
@@ -48,24 +28,12 @@
     .hotel-row.vip .r-sub { color:rgba(255,255,255,0.4); }
     .hotel-row.vip .r-price { color:#6EC6FF; }
     .hotel-row .r-day { font-size:12px; font-weight:400; color:var(--grey); }
-
     .hotel-note { font-size:12px; color:var(--grey); margin-top:12px; }
-
-    .hotel-included {
-      background:var(--light); border-radius:16px; padding:20px; margin-top:20px;
-    }
-    .hotel-included .inc-title {
-      font-size:12px; font-weight:600; letter-spacing:0.1em; text-transform:uppercase;
-      color:var(--grey); margin-bottom:12px;
-    }
-    .hotel-included .inc-item {
-      display:flex; align-items:center; gap:10px; font-size:13px; color:var(--black);
-      margin-bottom:8px;
-    }
+    .hotel-included { background:var(--light); border-radius:16px; padding:20px; margin-top:20px; }
+    .hotel-included .inc-title { font-size:12px; font-weight:600; letter-spacing:0.1em; text-transform:uppercase; color:var(--grey); margin-bottom:12px; }
+    .hotel-included .inc-item { display:flex; align-items:center; gap:10px; font-size:13px; color:var(--black); margin-bottom:8px; }
     .hotel-included .inc-item:last-child { margin-bottom:0; }
     .hotel-included .inc-check { color:var(--blue); font-weight:700; flex-shrink:0; }
-
-    /* ── Mobile ── */
     @media (max-width: 720px) {
       .hotel-cols { grid-template-columns:1fr; gap:48px; }
       .hotel-col-head h3 { font-size:18px; }
@@ -87,6 +55,7 @@
       <li><a href="adoption.html">Adoption</a></li>
       <li><a href="about.html">About</a></li>
       <li><a href="faq.html">FAQ</a></li>
+      <li><a href="customer.html">Login</a></li>
     </ul>
     <a href="grooming.html" class="nav-cta">Book Now</a>
     <button class="hamburger" id="hamburger" aria-label="Toggle menu" aria-expanded="false">
@@ -118,8 +87,6 @@
     </div>
 
     <div class="hotel-cols">
-
-      <!-- Pet Hotel -->
       <div>
         <div class="hotel-col-head">
           <div class="hotel-col-icon dark">🏨</div>
@@ -128,7 +95,6 @@
             <p>Per night · meals included</p>
           </div>
         </div>
-
         <p class="hotel-group-label dog">Dog</p>
         <div class="hotel-card">
           <div class="hotel-row"><span class="r-label">Small</span><span class="r-price">RM 50</span></div>
@@ -138,7 +104,6 @@
             <span class="r-price">RM 85</span>
           </div>
         </div>
-
         <p class="hotel-group-label cat">Cat</p>
         <div class="hotel-card">
           <div class="hotel-row"><span class="r-label">Small</span><span class="r-price">RM 50</span></div>
@@ -151,7 +116,6 @@
         <p class="hotel-note">* Price may change during festival days.</p>
       </div>
 
-      <!-- Day Care -->
       <div>
         <div class="hotel-col-head">
           <div class="hotel-col-icon blue">☀</div>
@@ -160,7 +124,6 @@
             <p>11am – 5pm · same day</p>
           </div>
         </div>
-
         <p class="hotel-group-label dog">Dog</p>
         <div class="hotel-card">
           <div class="hotel-row">
@@ -172,7 +135,6 @@
             <span class="r-price">RM 50<span class="r-day">/day</span></span>
           </div>
         </div>
-
         <p class="hotel-group-label cat">Cat</p>
         <div class="hotel-card">
           <div class="hotel-row">
@@ -184,7 +146,6 @@
             <span class="r-price">RM 25<span class="r-day">/day</span></span>
           </div>
         </div>
-
         <div class="hotel-included">
           <p class="inc-title">What's included</p>
           <div class="inc-item"><span class="inc-check">✓</span> Meals & fresh water</div>
@@ -290,6 +251,7 @@
     <a href="adoption.html">Adoption</a>
     <a href="about.html">About</a>
     <a href="faq.html">FAQ</a>
+    <a href="customer.html">Login</a>
     <a href="https://wa.me/601136020431" target="_blank" class="mobile-cta">Book Now</a>
   </div>
 
@@ -315,29 +277,20 @@
   <script src="config.js"></script>
   <script>
     document.addEventListener("DOMContentLoaded", () => {
-      if (typeof VPetConfig === "undefined") {
-        console.warn("VPetConfig not found — config.js is missing from this folder. Skipping config-driven content.");
-        return;
-      }
+      if (typeof VPetConfig === "undefined") { console.warn("VPetConfig not found"); return; }
       const c = VPetConfig;
-
       document.querySelectorAll(".cfg-phone").forEach(el => el.textContent = c.phone);
-
       document.querySelectorAll(".cfg-whatsapp").forEach(el => {
         el.href = "https://wa.me/" + c.whatsapp;
         if (el.textContent.includes("WhatsApp")) el.textContent = "WhatsApp " + c.phone;
       });
-
       document.querySelectorAll(".cfg-hours").forEach(el =>
         el.textContent = c.openingDays + ": " + c.openingHours
       );
-
       document.querySelectorAll(".cfg-address").forEach(el => el.textContent = c.address);
-
       document.querySelectorAll("a.nav-cta, a.mobile-cta").forEach(el => {
         if (el.href.includes("wa.me")) el.href = "https://wa.me/" + c.whatsapp;
       });
-
       if (c.showBanner) {
         const banner = document.createElement("div");
         banner.style.cssText = "background:#0071E3;color:white;text-align:center;padding:10px 24px;font-size:13px;font-weight:500;position:relative;z-index:201;";

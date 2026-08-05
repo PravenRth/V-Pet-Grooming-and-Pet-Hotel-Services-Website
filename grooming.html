@@ -6,7 +6,6 @@
   <title>Pet Grooming — V Pet</title>
   <link rel="stylesheet" href="style.css" />
   <style>
-    /* ── Grooming pricing (scoped to this page) ── */
     .groom-tabs-wrap { display:flex; justify-content:center; margin-bottom:40px; padding:0 16px; }
     .groom-tabs {
       background:var(--light); border-radius:30px; padding:4px;
@@ -18,22 +17,11 @@
       transition:background 0.2s, color 0.2s; font-family:var(--font);
     }
     .groom-tab-btn.active { background:var(--black); color:#fff; }
-
     .groom-tab-panel { max-width:860px; margin:0 auto; padding:0 16px; }
     .groom-tab-note { font-size:14px; color:var(--grey); text-align:center; margin-bottom:28px; }
     .groom-foot-note { font-size:12px; color:var(--grey); text-align:center; margin-top:8px; }
-
-    .groom-grid {
-      display:grid;
-      grid-template-columns:repeat(3, 1fr);
-      gap:16px;
-      margin-bottom:8px;
-    }
-
-    .groom-card {
-      background:var(--white); border:1px solid var(--border); border-radius:18px;
-      overflow:hidden; position:relative;
-    }
+    .groom-grid { display:grid; grid-template-columns:repeat(3, 1fr); gap:16px; margin-bottom:8px; }
+    .groom-card { background:var(--white); border:1px solid var(--border); border-radius:18px; overflow:hidden; position:relative; }
     .groom-card.featured { border:2px solid var(--blue); }
     .groom-card-badge {
       position:absolute; top:14px; right:14px; background:var(--blue); color:#fff;
@@ -47,18 +35,12 @@
       color:rgba(255,255,255,0.55); margin-bottom:4px; display:block;
     }
     .groom-card-head h3 { font-size:22px; font-weight:700; color:#fff; letter-spacing:-0.4px; }
-
     .groom-card-body { padding:18px 22px; display:flex; flex-direction:column; gap:12px; }
-    .groom-row {
-      display:flex; justify-content:space-between; align-items:center;
-      padding-bottom:12px; border-bottom:1px solid var(--border); gap:10px;
-    }
+    .groom-row { display:flex; justify-content:space-between; align-items:center; padding-bottom:12px; border-bottom:1px solid var(--border); gap:10px; }
     .groom-row:last-child { border-bottom:none; padding-bottom:0; }
     .groom-row .label { font-size:14px; color:var(--grey); line-height:1.3; }
     .groom-row .label .sub { display:block; font-size:11px; color:var(--blue); margin-top:2px; }
     .groom-row .price { font-size:15px; font-weight:700; color:var(--blue); white-space:nowrap; }
-
-    /* ── Mobile ── */
     @media (max-width: 720px) {
       .groom-grid { grid-template-columns:1fr; gap:14px; }
       .groom-card-head { padding:16px 20px; }
@@ -81,6 +63,7 @@
       <li><a href="adoption.html">Adoption</a></li>
       <li><a href="about.html">About</a></li>
       <li><a href="faq.html">FAQ</a></li>
+      <li><a href="customer.html">Login</a></li>
     </ul>
     <a href="grooming.html" class="nav-cta">Book Now</a>
     <button class="hamburger" id="hamburger" aria-label="Toggle menu" aria-expanded="false">
@@ -118,11 +101,9 @@
       </div>
     </div>
 
-    <!-- Basic Grooming Tab -->
     <div id="tab-content-basic" class="groom-tab-panel">
       <p class="groom-tab-note">Bath · Blow dry · Ear cleaning · Nail trim · Teeth brushing</p>
       <div class="groom-grid">
-
         <div class="groom-card">
           <div class="groom-card-head"><span class="size-label">Size</span><h3>Small</h3></div>
           <div class="groom-card-body">
@@ -132,7 +113,6 @@
             <div class="groom-row"><span class="label">Cat</span><span class="price">RM 65+</span></div>
           </div>
         </div>
-
         <div class="groom-card featured">
           <div class="groom-card-badge">Popular</div>
           <div class="groom-card-head"><span class="size-label">Size</span><h3>Medium</h3></div>
@@ -143,7 +123,6 @@
             <div class="groom-row"><span class="label">Cat</span><span class="price">RM 75+</span></div>
           </div>
         </div>
-
         <div class="groom-card">
           <div class="groom-card-head"><span class="size-label">Size</span><h3>Large</h3></div>
           <div class="groom-card-body">
@@ -157,11 +136,9 @@
       <p class="groom-foot-note">* Extra large & aggressive behaviour will have extra charges.</p>
     </div>
 
-    <!-- Full Grooming Tab -->
     <div id="tab-content-full" class="groom-tab-panel" style="display:none;">
       <p class="groom-tab-note">Everything in Basic + full body styling or hand cut</p>
       <div class="groom-grid">
-
         <div class="groom-card">
           <div class="groom-card-head"><span class="size-label">Size</span><h3>Small</h3></div>
           <div class="groom-card-body">
@@ -170,7 +147,6 @@
             <div class="groom-row"><span class="label">Full Grooming<span class="sub">Cat</span></span><span class="price">RM 135</span></div>
           </div>
         </div>
-
         <div class="groom-card featured">
           <div class="groom-card-badge">Popular</div>
           <div class="groom-card-head"><span class="size-label">Size</span><h3>Medium</h3></div>
@@ -179,7 +155,6 @@
             <div class="groom-row"><span class="label">Full Hand Cut<span class="sub">Dog</span></span><span class="price">RM 150+</span></div>
           </div>
         </div>
-
         <div class="groom-card">
           <div class="groom-card-head"><span class="size-label">Size</span><h3>Large</h3></div>
           <div class="groom-card-body">
@@ -272,6 +247,7 @@
     <a href="adoption.html">Adoption</a>
     <a href="about.html">About</a>
     <a href="faq.html">FAQ</a>
+    <a href="customer.html">Login</a>
     <a href="https://wa.me/601136020431" target="_blank" class="mobile-cta">Book Now</a>
   </div>
 
@@ -297,29 +273,20 @@
   <script src="config.js"></script>
   <script>
     document.addEventListener("DOMContentLoaded", () => {
-      if (typeof VPetConfig === "undefined") {
-        console.warn("VPetConfig not found — config.js is missing from this folder. Skipping config-driven content.");
-        return;
-      }
+      if (typeof VPetConfig === "undefined") { console.warn("VPetConfig not found"); return; }
       const c = VPetConfig;
-
       document.querySelectorAll(".cfg-phone").forEach(el => el.textContent = c.phone);
-
       document.querySelectorAll(".cfg-whatsapp").forEach(el => {
         el.href = "https://wa.me/" + c.whatsapp;
         if (el.textContent.includes("WhatsApp")) el.textContent = "WhatsApp " + c.phone;
       });
-
       document.querySelectorAll(".cfg-hours").forEach(el =>
         el.textContent = c.openingDays + ": " + c.openingHours
       );
-
       document.querySelectorAll(".cfg-address").forEach(el => el.textContent = c.address);
-
       document.querySelectorAll("a.nav-cta, a.mobile-cta").forEach(el => {
         if (el.href.includes("wa.me")) el.href = "https://wa.me/" + c.whatsapp;
       });
-
       if (c.showBanner) {
         const banner = document.createElement("div");
         banner.style.cssText = "background:#0071E3;color:white;text-align:center;padding:10px 24px;font-size:13px;font-weight:500;position:relative;z-index:201;";

@@ -6,22 +6,45 @@
   <title>Admin Login — V Pet</title>
   <link rel="stylesheet" href="style.css" />
   <style>
-    body { background: var(--black); }
-    .admin-nav { display: flex; align-items: center; padding: 20px 24px; }
+    .admin-nav { display: flex; align-items: center; padding: 20px 24px; position: relative; z-index: 2; }
     .admin-nav .nav-logo { font-size: 19px; font-weight: 600; color: #fff; letter-spacing: -0.3px; }
     .admin-nav .nav-logo sup { font-size: 10px; font-weight: 400; color: rgba(255,255,255,0.5); }
 
     .admin-wrap {
+      position: relative;
       min-height: calc(100vh - 76px);
       display: flex; align-items: center; justify-content: center;
       padding: 32px 20px 64px;
+      overflow: hidden;
+      isolation: isolate;
+    }
+    .admin-wrap::before {
+      content: "";
+      position: absolute;
+      inset: -30px;
+      background-image: url('https://images.unsplash.com/photo-1548199973-03cce0bbc87b?w=1800&auto=format&fit=crop');
+      background-size: cover;
+      background-position: center;
+      filter: blur(16px) brightness(0.4) saturate(1.05);
+      transform: scale(1.08);
+      z-index: -2;
+    }
+    .admin-wrap::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(160deg, rgba(0,0,0,0.55), rgba(0,0,0,0.25));
+      z-index: -1;
     }
     .admin-card {
       width: 100%; max-width: 400px;
-      background: #fff;
+      background: rgba(255,255,255,0.94);
+      backdrop-filter: blur(20px) saturate(180%);
+      -webkit-backdrop-filter: blur(20px) saturate(180%);
+      border: 1px solid rgba(255,255,255,0.5);
       border-radius: 20px;
       padding: 40px 32px;
-      box-shadow: 0 24px 64px rgba(0,0,0,0.5);
+      box-shadow: 0 24px 64px rgba(0,0,0,0.55);
     }
     .admin-heading { text-align: center; margin-bottom: 28px; }
     .admin-heading .eyebrow {
@@ -191,6 +214,7 @@
         confirmationResult = await signInWithPhoneNumber(auth, phone, recaptchaVerifier);
         showStep("otp");
       } catch (err) {
+        console.error(err);
         showAdminMessage(friendlyAuthError(err), "error");
       } finally {
         btn.disabled = false; btn.textContent = "Send Code";
@@ -222,6 +246,7 @@
         showAdminMessage("Welcome back. Redirecting...", "success");
         setTimeout(() => { window.location.href = "admin-dashboard.html"; }, 1000);
       } catch (err) {
+        console.error(err);
         showAdminMessage(friendlyAuthError(err), "error");
         btn.disabled = false; btn.textContent = "Verify & Log In";
       }

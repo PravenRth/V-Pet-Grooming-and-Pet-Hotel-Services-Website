@@ -17,6 +17,7 @@
       <li><a href="adoption.html">Adoption</a></li>
       <li><a href="about.html">About</a></li>
       <li><a href="faq.html">FAQ</a></li>
+      <li><a href="customer.html">Login</a></li>
     </ul>
     <a href="grooming.html" class="nav-cta">Book Now</a>
     <button class="hamburger" id="hamburger" aria-label="Toggle menu" aria-expanded="false">
@@ -39,7 +40,6 @@
 
     <div style="max-width:1100px;margin:0 auto;display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:24px;">
 
-      <!-- Chicken Nugget -->
       <div style="background:var(--white);border:1px solid var(--border);border-radius:20px;overflow:hidden;transition:transform 0.2s,box-shadow 0.2s;" onmouseover="this.style.transform='translateY(-6px)';this.style.boxShadow='0 16px 48px rgba(0,0,0,0.12)'" onmouseout="this.style.transform='';this.style.boxShadow=''">
         <div style="background:#F5F0EB;padding:32px;display:flex;align-items:center;justify-content:center;min-height:280px;">
           <img src="chicken-nugget.png" alt="Freeze-Dried Chicken Nugget" style="width:100%;max-width:220px;object-fit:contain;" />
@@ -56,7 +56,6 @@
         </div>
       </div>
 
-      <!-- Egg Yolk -->
       <div style="background:var(--white);border:1px solid var(--border);border-radius:20px;overflow:hidden;transition:transform 0.2s,box-shadow 0.2s;" onmouseover="this.style.transform='translateY(-6px)';this.style.boxShadow='0 16px 48px rgba(0,0,0,0.12)'" onmouseout="this.style.transform='';this.style.boxShadow=''">
         <div style="background:#FFFBEB;padding:32px;display:flex;align-items:center;justify-content:center;min-height:280px;">
           <img src="egg-yolk.png" alt="Freeze-Dried Egg Yolk" style="width:100%;max-width:220px;object-fit:contain;" />
@@ -73,7 +72,6 @@
         </div>
       </div>
 
-      <!-- Chicken Liver -->
       <div style="background:var(--white);border:1px solid var(--border);border-radius:20px;overflow:hidden;transition:transform 0.2s,box-shadow 0.2s;" onmouseover="this.style.transform='translateY(-6px)';this.style.boxShadow='0 16px 48px rgba(0,0,0,0.12)'" onmouseout="this.style.transform='';this.style.boxShadow=''">
         <div style="background:#EFF6FF;padding:32px;display:flex;align-items:center;justify-content:center;min-height:280px;">
           <img src="chicken-liver.png" alt="Freeze-Dried Chicken Liver" style="width:100%;max-width:220px;object-fit:contain;" />
@@ -90,7 +88,6 @@
         </div>
       </div>
 
-      <!-- Raw Meat -->
       <div style="background:var(--white);border:1px solid var(--border);border-radius:20px;overflow:hidden;transition:transform 0.2s,box-shadow 0.2s;" onmouseover="this.style.transform='translateY(-6px)';this.style.boxShadow='0 16px 48px rgba(0,0,0,0.12)'" onmouseout="this.style.transform='';this.style.boxShadow=''">
         <div style="background:#F5F3FF;padding:32px;display:flex;align-items:center;justify-content:center;min-height:280px;">
           <img src="raw-meat.png" alt="Freeze-Dried Raw Meat" style="width:100%;max-width:220px;object-fit:contain;" />
@@ -109,7 +106,6 @@
 
     </div>
 
-    <!-- Why freeze-dried strip -->
     <div style="max-width:1100px;margin:56px auto 0;background:var(--black);border-radius:20px;padding:40px 48px;display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:32px;">
       <div style="text-align:center;">
         <div style="font-size:28px;margin-bottom:10px;">❄️</div>
@@ -217,6 +213,7 @@
     <a href="adoption.html">Adoption</a>
     <a href="about.html">About</a>
     <a href="faq.html">FAQ</a>
+    <a href="customer.html">Login</a>
     <a href="https://wa.me/601136020431" target="_blank" class="mobile-cta">Book Now</a>
   </div>
 
@@ -229,7 +226,6 @@
       hamburger.setAttribute("aria-expanded", isOpen);
       document.body.style.overflow = isOpen ? "hidden" : "";
     });
-    // Close on link click
     mobileMenu.querySelectorAll("a").forEach(link => {
       link.addEventListener("click", () => {
         mobileMenu.classList.remove("open");
@@ -242,33 +238,20 @@
 
   <script src="config.js"></script>
   <script>
-    // Apply config to page
     document.addEventListener("DOMContentLoaded", () => {
       const c = VPetConfig;
-
-      // Update all phone numbers
       document.querySelectorAll(".cfg-phone").forEach(el => el.textContent = c.phone);
-
-      // Update all WhatsApp links
       document.querySelectorAll(".cfg-whatsapp").forEach(el => {
         el.href = "https://wa.me/" + c.whatsapp;
         if (el.textContent.includes("WhatsApp")) el.textContent = "WhatsApp " + c.phone;
       });
-
-      // Update hours
       document.querySelectorAll(".cfg-hours").forEach(el =>
         el.textContent = c.openingDays + ": " + c.openingHours
       );
-
-      // Update address
       document.querySelectorAll(".cfg-address").forEach(el => el.textContent = c.address);
-
-      // Update nav Book Now WhatsApp link
       document.querySelectorAll("a.nav-cta, a.mobile-cta").forEach(el => {
         if (el.href.includes("wa.me")) el.href = "https://wa.me/" + c.whatsapp;
       });
-
-      // Promo banner
       if (c.showBanner) {
         const banner = document.createElement("div");
         banner.style.cssText = "background:#0071E3;color:white;text-align:center;padding:10px 24px;font-size:13px;font-weight:500;position:relative;z-index:201;";

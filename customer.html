@@ -7,18 +7,40 @@
   <link rel="stylesheet" href="style.css" />
   <style>
     .auth-wrap {
+      position: relative;
       min-height: calc(100vh - 52px);
       display: flex; align-items: center; justify-content: center;
-      background: var(--light);
       padding: 48px 20px;
+      overflow: hidden;
+      isolation: isolate;
+    }
+    .auth-wrap::before {
+      content: "";
+      position: absolute;
+      inset: -30px;
+      background-image: url('https://images.unsplash.com/photo-1583511655826-05700d52f4d9?w=1800&auto=format&fit=crop');
+      background-size: cover;
+      background-position: center;
+      filter: blur(14px) brightness(0.55) saturate(1.1);
+      transform: scale(1.08);
+      z-index: -2;
+    }
+    .auth-wrap::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(160deg, rgba(0,0,0,0.35), rgba(0,113,227,0.25));
+      z-index: -1;
     }
     .auth-card {
       width: 100%; max-width: 420px;
-      background: var(--white);
-      border: 1px solid var(--border);
+      background: rgba(255,255,255,0.92);
+      backdrop-filter: blur(20px) saturate(180%);
+      -webkit-backdrop-filter: blur(20px) saturate(180%);
+      border: 1px solid rgba(255,255,255,0.6);
       border-radius: 20px;
       padding: 40px 32px;
-      box-shadow: 0 8px 40px rgba(0,0,0,0.06);
+      box-shadow: 0 24px 64px rgba(0,0,0,0.35);
     }
     .auth-heading { text-align: center; margin-bottom: 28px; }
     .auth-heading .eyebrow {
@@ -238,7 +260,6 @@
     let recaptchaVerifier = null;
     let currentUser = null;
 
-    // ── Step 1: send OTP ──
     document.getElementById("step-phone").addEventListener("submit", async (e) => {
       e.preventDefault();
       hideAuthMessage();
@@ -254,13 +275,13 @@
         confirmationResult = await signInWithPhoneNumber(auth, phone, recaptchaVerifier);
         showStep("otp");
       } catch (err) {
+        console.error(err);
         showAuthMessage(friendlyAuthError(err), "error");
       } finally {
         btn.disabled = false; btn.textContent = "Send Code";
       }
     });
 
-    // ── Step 2: verify OTP ──
     document.getElementById("step-otp").addEventListener("submit", async (e) => {
       e.preventDefault();
       hideAuthMessage();
@@ -291,12 +312,12 @@
           showStep("profile");
         }
       } catch (err) {
+        console.error(err);
         showAuthMessage(friendlyAuthError(err), "error");
         btn.disabled = false; btn.textContent = "Verify & Continue";
       }
     });
 
-    // ── Step 3: save profile (first-time users) ──
     document.getElementById("step-profile").addEventListener("submit", async (e) => {
       e.preventDefault();
       hideAuthMessage();
@@ -306,8 +327,6 @@
       btn.disabled = true; btn.textContent = "Saving...";
 
       try {
-        // NOTE: Firestore security rules must enforce that role can only
-        // ever be "customer" when written by the client — see rules provided.
         await setDoc(doc(db, "users", currentUser.uid), {
           name,
           phone: currentUser.phoneNumber,
@@ -317,6 +336,7 @@
         showAuthMessage("Account set up! Redirecting...", "success");
         setTimeout(() => { window.location.href = "index.html"; }, 1000);
       } catch (err) {
+        console.error(err);
         showAuthMessage(friendlyAuthError(err), "error");
         btn.disabled = false; btn.textContent = "Finish";
       }
