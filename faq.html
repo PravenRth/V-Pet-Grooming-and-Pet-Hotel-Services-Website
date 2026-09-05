@@ -105,7 +105,7 @@
       <p>We're happy to help. Send us a message and we'll get back to you shortly.</p>
       <a href="#" class="btn-primary cfg-whatsapp">WhatsApp Us</a>
     </div>
-  </section>  </section>
+  </section>
 
   <!-- LOCATION -->
   <section class="location-section">
@@ -168,24 +168,6 @@
     </div>
   </footer>
 
-  <script>
-    document.querySelectorAll('.faq-question').forEach(btn => {
-      btn.addEventListener('click', () => {
-        const item = btn.parentElement;
-        const isOpen = item.classList.contains('open');
-        document.querySelectorAll('.faq-item').forEach(i => {
-          i.classList.remove('open');
-          i.querySelector('.faq-question').setAttribute('aria-expanded', 'false');
-        });
-        if (!isOpen) {
-          item.classList.add('open');
-          btn.setAttribute('aria-expanded', 'true');
-        }
-      });
-    });
-  </script>
-
-
   <!-- Mobile Menu -->
   <div class="mobile-menu" id="mobileMenu">
     <a href="index.html">Home</a>
@@ -218,67 +200,6 @@
     });
   </script>
 
-  <script src="config.js"></script>
-  <script>
-    document.addEventListener("DOMContentLoaded", () => {
-      const c = VPetConfig;
-      document.querySelectorAll(".cfg-phone").forEach(el => el.textContent = c.phone);
-      document.querySelectorAll(".cfg-whatsapp").forEach(el => {
-        el.href = "https://wa.me/" + c.whatsapp;
-        if (el.textContent.includes("WhatsApp")) el.textContent = "WhatsApp " + c.phone;
-      });
-      document.querySelectorAll(".cfg-hours").forEach(el =>
-        el.textContent = c.openingDays + ": " + c.openingHours
-      );
-      document.querySelectorAll(".cfg-address").forEach(el => el.textContent = c.address);
-      document.querySelectorAll("a.nav-cta, a.mobile-cta").forEach(el => {
-        if (el.href.includes("wa.me")) el.href = "https://wa.me/" + c.whatsapp;
-      });
-      if (c.showBanner) {
-        const banner = document.createElement("div");
-        banner.style.cssText = "background:#0071E3;color:white;text-align:center;padding:10px 24px;font-size:13px;font-weight:500;position:relative;z-index:201;";
-        banner.innerHTML = c.bannerText + ' <a href="https://wa.me/' + c.whatsapp + '" style="color:white;text-decoration:underline;margin-left:8px;">Book now →</a>';
-        document.body.insertBefore(banner, document.body.firstChild);
-      }
-    });
-  </script>
-
-  <script>
-    document.addEventListener("DOMContentLoaded", () => {
-      const container = document.getElementById("faq-container");
-      if (!container || !VPetConfig.faq) return;
-      VPetConfig.faq.forEach(section => {
-        const catDiv = document.createElement("div");
-        catDiv.className = "faq-category";
-        catDiv.innerHTML = '<p class="faq-category-title">' + section.category + '</p>';
-        section.questions.forEach((item, i) => {
-          const faqItem = document.createElement("div");
-          faqItem.className = "faq-item";
-          faqItem.innerHTML =
-            '<button class="faq-question" aria-expanded="false">' +
-              '<h3>' + item.q + '</h3>' +
-              '<div class="faq-icon">+</div>' +
-            '</button>' +
-            '<div class="faq-answer"><p>' + item.a + '</p></div>';
-          catDiv.appendChild(faqItem);
-        });
-        container.appendChild(catDiv);
-      });
-      document.querySelectorAll(".faq-question").forEach(btn => {
-        btn.addEventListener("click", () => {
-          const item = btn.parentElement;
-          const isOpen = item.classList.contains("open");
-          document.querySelectorAll(".faq-item").forEach(i => {
-            i.classList.remove("open");
-            i.querySelector(".faq-question").setAttribute("aria-expanded", "false");
-          });
-          if (!isOpen) {
-            item.classList.add("open");
-            btn.setAttribute("aria-expanded", "true");
-          }
-        });
-      });
-    });
-  </script>
+  <script type="module" src="config-loader.js"></script>
 </body>
 </html>

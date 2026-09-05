@@ -120,9 +120,9 @@
     <p>Book a grooming session or hotel stay today — it only takes a message.</p>
     <a href="grooming.html" class="btn-primary">Get Started</a>
     <div class="contact-row">
-      <div class="contact-item"><p class="label">WhatsApp / Phone</p><p class="value">011-3602 0431</p></div>
+      <div class="contact-item"><p class="label">WhatsApp / Phone</p><p class="value cfg-phone">011-3602 0431</p></div>
       <div class="contact-item"><p class="label">Location</p><p class="value">Skudai, Johor</p></div>
-      <div class="contact-item"><p class="label">Hours</p><p class="value">Tue – Sun: 10am – 7pm</p></div>
+      <div class="contact-item"><p class="label">Hours</p><p class="value cfg-hours">Tue – Sun: 10am – 7pm</p></div>
     </div>
   </div>
 
@@ -138,14 +138,14 @@
             <div class="detail-icon">📍</div>
             <div>
               <p class="detail-label">Address</p>
-              <p class="detail-value">83, Jalan Seri Impian 1, Taman Impian Emas,<br>83100 Skudai, Johor</p>
+              <p class="detail-value cfg-address">83, Jalan Seri Impian 1, Taman Impian Emas, 83100 Skudai, Johor</p>
             </div>
           </div>
           <div class="location-detail">
             <div class="detail-icon">🕐</div>
             <div>
               <p class="detail-label">Opening Hours</p>
-              <p class="detail-value">Tuesday – Sunday: 10am – 7pm</p>
+              <p class="detail-value cfg-hours">Tuesday – Sunday: 10am – 7pm</p>
             </div>
           </div>
           <div class="location-detail">
@@ -156,7 +156,7 @@
             </div>
             <div>
               <p class="detail-label">WhatsApp / Phone</p>
-              <p class="detail-value">011-3602 0431</p>
+              <p class="detail-value cfg-phone">011-3602 0431</p>
             </div>
           </div>
         </div>
@@ -200,7 +200,7 @@
     <a href="about.html">About</a>
     <a href="faq.html">FAQ</a>
     <a href="customer.html">Login</a>
-    <a href="https://wa.me/601136020431" target="_blank" class="mobile-cta">Book Now</a>
+    <a href="https://wa.me/601136020431" target="_blank" class="mobile-cta cfg-whatsapp">Book Now</a>
   </div>
 
   <script>
@@ -222,5 +222,7 @@
       });
     });
   </script>
+
+  <script type="module" src="config-loader.js"></script>
 </body>
 </html>

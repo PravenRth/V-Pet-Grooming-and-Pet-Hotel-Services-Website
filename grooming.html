@@ -270,31 +270,7 @@
     });
   </script>
 
-  <script src="config.js"></script>
-  <script>
-    document.addEventListener("DOMContentLoaded", () => {
-      if (typeof VPetConfig === "undefined") { console.warn("VPetConfig not found"); return; }
-      const c = VPetConfig;
-      document.querySelectorAll(".cfg-phone").forEach(el => el.textContent = c.phone);
-      document.querySelectorAll(".cfg-whatsapp").forEach(el => {
-        el.href = "https://wa.me/" + c.whatsapp;
-        if (el.textContent.includes("WhatsApp")) el.textContent = "WhatsApp " + c.phone;
-      });
-      document.querySelectorAll(".cfg-hours").forEach(el =>
-        el.textContent = c.openingDays + ": " + c.openingHours
-      );
-      document.querySelectorAll(".cfg-address").forEach(el => el.textContent = c.address);
-      document.querySelectorAll("a.nav-cta, a.mobile-cta").forEach(el => {
-        if (el.href.includes("wa.me")) el.href = "https://wa.me/" + c.whatsapp;
-      });
-      if (c.showBanner) {
-        const banner = document.createElement("div");
-        banner.style.cssText = "background:#0071E3;color:white;text-align:center;padding:10px 24px;font-size:13px;font-weight:500;position:relative;z-index:201;";
-        banner.innerHTML = c.bannerText + ' <a href="https://wa.me/' + c.whatsapp + '" style="color:white;text-decoration:underline;margin-left:8px;">Book now →</a>';
-        document.body.insertBefore(banner, document.body.firstChild);
-      }
-    });
-  </script>
+  <script type="module" src="config-loader.js"></script>
 
   <script>
     function showTab(tab) {
