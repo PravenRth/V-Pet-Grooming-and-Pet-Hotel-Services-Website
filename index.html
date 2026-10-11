@@ -7,7 +7,6 @@
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
-
   <nav class="nav">
     <a href="index.html" class="nav-logo">🐾 V Pet <sup>Skudai</sup></a>
     <ul class="nav-links">
@@ -18,7 +17,6 @@
       <li><a href="adoption.html">Adoption</a></li>
       <li><a href="about.html">About</a></li>
       <li><a href="faq.html">FAQ</a></li>
-      <li><a href="customer.html">Login</a></li>
     </ul>
     <a href="grooming.html" class="nav-cta">Book Now</a>
     <button class="hamburger" id="hamburger" aria-label="Toggle menu" aria-expanded="false">
@@ -177,7 +175,6 @@
     </div>
   </section>
 
-
   <footer>
     <p>© 2026 V Pet Grooming & Pet Hotel Services, Skudai</p>
     <div class="footer-links">
@@ -189,7 +186,6 @@
     </div>
   </footer>
 
-
   <!-- Mobile Menu -->
   <div class="mobile-menu" id="mobileMenu">
     <a href="index.html" class="active">Home</a>
@@ -199,7 +195,6 @@
     <a href="adoption.html">Adoption</a>
     <a href="about.html">About</a>
     <a href="faq.html">FAQ</a>
-    <a href="customer.html">Login</a>
     <a href="https://wa.me/601136020431" target="_blank" class="mobile-cta cfg-whatsapp">Book Now</a>
   </div>
 
@@ -212,7 +207,6 @@
       hamburger.setAttribute("aria-expanded", isOpen);
       document.body.style.overflow = isOpen ? "hidden" : "";
     });
-    // Close on link click
     mobileMenu.querySelectorAll("a").forEach(link => {
       link.addEventListener("click", () => {
         mobileMenu.classList.remove("open");

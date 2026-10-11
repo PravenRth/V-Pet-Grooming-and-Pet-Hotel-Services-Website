@@ -1,26 +1,10 @@
 // config-loader.js
-// Loads site configuration (contact info, hours, banner, FAQ) from Firestore
-// and applies it to the page. This replaces the old static config.js file —
-// now the info can be edited from admin-dashboard.html with no code needed,
-// and changes appear on the live site right away.
+// Reads the site settings from config.js (contact info, hours, banner, FAQ)
+// and applies them to every page. To change anything, edit config.js only.
 
-import { db } from "./firebase-init.js";
-import { doc, getDoc } from "https://www.gstatic.com/firebasejs/10.13.0/firebase-firestore.js";
+import { VPetConfig as c } from "./config.js";
 
-// Fallback values, used only if Firestore can't be reached or the
-// config document hasn't been created yet.
-const DEFAULT_CONFIG = {
-  phone: "011-3602 0431",
-  whatsapp: "601136020431",
-  address: "83, Jalan Seri Impian 1, Taman Impian Emas, 83100 Skudai, Johor",
-  openingDays: "Tuesday – Sunday",
-  openingHours: "10am – 7pm",
-  showBanner: false,
-  bannerText: "",
-  faq: []
-};
-
-function applyConfig(c) {
+function applyConfig() {
   document.querySelectorAll(".cfg-phone").forEach(el => el.textContent = c.phone);
   document.querySelectorAll(".cfg-whatsapp").forEach(el => {
     el.href = "https://wa.me/" + c.whatsapp;
@@ -109,16 +93,4 @@ function renderFaq(faq) {
   });
 }
 
-async function loadConfig() {
-  try {
-    const snap = await getDoc(doc(db, "config", "site"));
-    return snap.exists() ? { ...DEFAULT_CONFIG, ...snap.data() } : DEFAULT_CONFIG;
-  } catch (err) {
-    console.error("Could not load site config from Firestore, using defaults:", err);
-    return DEFAULT_CONFIG;
-  }
-}
-
-document.addEventListener("DOMContentLoaded", () => {
-  loadConfig().then(applyConfig);
-});
+document.addEventListener("DOMContentLoaded", applyConfig);

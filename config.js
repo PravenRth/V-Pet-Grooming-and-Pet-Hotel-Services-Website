@@ -1,9 +1,9 @@
 // config.js
-// Central config used across all V Pet pages via the VPetConfig object.
+// Central config used across all V Pet pages.
 // Edit the values below to update contact info, hours, banner, and FAQ
-// content site-wide — every page pulls from here automatically.
+// content site-wide. Every page pulls from here automatically.
 
-const VPetConfig = {
+export const VPetConfig = {
   // Displayed phone number (formatted for humans)
   phone: "011-3602 0431",
 
@@ -21,7 +21,7 @@ const VPetConfig = {
   showBanner: false,
   bannerText: "🎉 New customers get 10% off their first grooming session!",
 
-  // FAQ content for faq.html — grouped by category
+  // FAQ content for faq.html, grouped by category
   faq: [
     {
       category: "Grooming",
@@ -49,7 +49,7 @@ const VPetConfig = {
         },
         {
           q: "Can I bring my pet's own food?",
-          a: "Absolutely — if your pet has dietary preferences or is on a special diet, feel free to bring their usual food and we'll feed them accordingly."
+          a: "Absolutely. If your pet has dietary preferences or is on a special diet, feel free to bring their usual food and we'll feed them accordingly."
         },
         {
           q: "Do prices change during festival seasons?",
